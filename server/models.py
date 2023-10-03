@@ -11,7 +11,7 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(60), unique=True, nullable=False)
-    __password_hash = db.Column(db.String)
+    password_hash = db.Column(db.String)
 
     def __repr__(self):
         return f"<username: {self.username}, id: {self.id}>"
@@ -21,11 +21,10 @@ class Author(db.Model):
     __tablename__ = "authors"
 
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String)
-    last_name = db.Column(db.String, nullable=False)
+    name = db.Column(db.String, nullable=False)
 
     def __repr__(self):
-        return f"<author: {self.first_name} {self.last_name}"
+        return f"<author: {self.name}"
 
 
 class Book(db.Model):
@@ -33,6 +32,7 @@ class Book(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
+    desc = db.Column(db.String)
     cover_image = db.Column(db.String)
     page_count = db.Column(db.Integer)
     publish_year = db.Column(db.Integer)
