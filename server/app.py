@@ -84,14 +84,33 @@ class Login(Resource):
 
         user = User.query.filter_by(username=username).first()
         if user and user.authenticate(password):
+            session["user_id"] = user.id
+
             return user_schema.dump(user), 200
         else:
             return {"message": "401: Unauthorized"}, 401
 
 
+class Logout(Resource):
+    def delete(self):
+        session["user_id"] = None
+        return {"message": "Logout successful"}, 204
+
+
 class Signup(Resource):
     def post(self):
-        pass
+        json = request.get_json()
+
+        user = User(username=json.get("username"))
+        user.password_hash = json.get("password")
+
+        try:
+            db.session.add(user)
+            db.session.commit()
+            return user_schema.dump(user), 201
+
+        except IntegrityError:
+            return {"message": "401: Unauthorized"}, 401
 
 
 class Reviews(Resource):
@@ -189,6 +208,7 @@ api.add_resource(AuthorByID, "/authors/<int:id>", endpoint="authors/<int:id>")
 api.add_resource(Books, "/books", endpoint="books")
 api.add_resource(BookByID, "/books/<int:id>", endpoint="books/<int:id>")
 api.add_resource(Login, "/login", endpoint="login")
+api.add_resource(Logout, "/logout", endpoint="logout")
 
 
 @app.route("/")
