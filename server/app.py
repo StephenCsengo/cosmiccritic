@@ -54,7 +54,6 @@ class BookSchema(ma.SQLAlchemySchema):
     cover_image = ma.auto_field()
     page_count = ma.auto_field()
     publish_year = ma.auto_field()
-    author_id = ma.auto_field
     author = ma.Nested(author_schema)
 
 
@@ -69,8 +68,6 @@ class ReviewSchema(ma.SQLAlchemySchema):
     id = ma.auto_field()
     rating = ma.auto_field()
     review = ma.auto_field()
-    user_id = ma.auto_field()
-    book_id = ma.auto_field()
     user = ma.Nested(user_schema)
     book = ma.Nested(book_schema)
 
