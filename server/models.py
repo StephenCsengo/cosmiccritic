@@ -13,6 +13,8 @@ class User(db.Model):
     username = db.Column(db.String(60), unique=True, nullable=False)
     password_hash = db.Column(db.String)
 
+    reviews = db.relationship("Review", backref="user")
+
     def __repr__(self):
         return f"<username: {self.username}, id: {self.id}>"
 
@@ -22,6 +24,8 @@ class Author(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
+
+    books = db.relationship("Book", backref="author")
 
     def __repr__(self):
         return f"<author: {self.name}"
@@ -38,7 +42,7 @@ class Book(db.Model):
     publish_year = db.Column(db.Integer)
     author_id = db.Column(db.Integer, db.ForeignKey("authors.id"), nullable=False)
 
-    author = db.relationship("Author", backref="authors")
+    reviews = db.relationship("Review", backref="book")
 
     def __repr__(self):
         return f"<{self.title} by author #{self.author_id}>"
@@ -52,9 +56,6 @@ class Review(db.Model):
     review = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     book_id = db.Column(db.Integer, db.ForeignKey("books.id"), nullable=False)
-
-    user = db.relationship("User", backref="users")
-    book = db.relationship("Book", backref="books")
 
     def __repr__(self):
         return f"<Rating: {self.rating}, Review: {self.review} by user #{self.user_id} of book #{self.book_id}>"

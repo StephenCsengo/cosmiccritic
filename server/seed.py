@@ -8,7 +8,7 @@ from faker import Faker
 
 # Local imports
 from app import app
-from models import db, User, Book, Author
+from models import db, User, Book, Author, Review
 
 if __name__ == "__main__":
     fake = Faker()
@@ -17,13 +17,14 @@ if __name__ == "__main__":
         User.query.delete()
         Book.query.delete()
         Author.query.delete()
-        db.session.commit()
+        Review.query.delete()
+        # db.session.commit()
 
         # Seed code goes here!
 
         users = []
         usernames = []
-        for num in range(30):
+        for num in range(60):
             username = fake.first_name()
             while username in usernames:
                 username = fake.first_name()
@@ -36,7 +37,7 @@ if __name__ == "__main__":
 
         for user in users:
             db.session.add(user)
-            db.session.commit()
+            # db.session.commit()
 
         print("User seed complete.")
 
@@ -66,7 +67,7 @@ if __name__ == "__main__":
         for author in authors:
             add_author = Author(name=author)
             db.session.add(add_author)
-            db.session.commit()
+            # db.session.commit()
         print("Author seeding complete")
 
         science_fiction_books = [
@@ -321,5 +322,18 @@ if __name__ == "__main__":
         ]
         for book in science_fiction_books:
             db.session.add(book)
-            db.session.commit()
+            # db.session.commit()
         print("Book seeding complete.")
+
+        # Review seeding
+        for num in range(100):
+            user = rc(User.query.all())
+
+            add_review = Review(
+                rating=rc(range(10)),
+                review=fake.text(),
+                user_id=user.id,
+                book=rc(Book.query.all()),
+            )
+            db.session.add(add_review)
+            db.session.commit()
