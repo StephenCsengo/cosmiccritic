@@ -76,8 +76,17 @@ review_schema = ReviewSchema()
 many_reviews_schema = ReviewSchema(many=True)
 
 
-class UserLogin(Resource):
-    pass
+class Login(Resource):
+    def post(self):
+        json = request.get_json()
+        username = json.get("username")
+        password = json.get("password")
+
+        user = User.query.filter_by(username=username).first()
+        if user and user.authenticate(password):
+            return user_schema.dump(user), 200
+        else:
+            return {"message": "401: Unauthorized"}, 401
 
 
 class Signup(Resource):
@@ -179,6 +188,7 @@ api.add_resource(Authors, "/authors", endpoint="authors")
 api.add_resource(AuthorByID, "/authors/<int:id>", endpoint="authors/<int:id>")
 api.add_resource(Books, "/books", endpoint="books")
 api.add_resource(BookByID, "/books/<int:id>", endpoint="books/<int:id>")
+api.add_resource(Login, "/login", endpoint="login")
 
 
 @app.route("/")
