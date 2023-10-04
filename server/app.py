@@ -76,7 +76,10 @@ review_schema = ReviewSchema()
 many_reviews_schema = ReviewSchema(many=True)
 
 
-# Views go here!
+class UserLogin(Resource):
+    pass
+
+
 class Signup(Resource):
     def post(self):
         pass
@@ -169,13 +172,13 @@ class BookByID(Resource):
 
 api.add_resource(Signup, "/signup", endpoint="signup")
 api.add_resource(Reviews, "/reviews", endpoint="reviews")
-api.add_resource(ReviewByID, "/reviews/<int:id>")
+api.add_resource(ReviewByID, "/reviews/<int:id>", endpoint="reviews/<int:id>")
 api.add_resource(Users, "/users", endpoint="users")
-api.add_resource(UserByID, "/users/<int:id>")
+api.add_resource(UserByID, "/users/<int:id>", endpoint="users/<int:id>")
 api.add_resource(Authors, "/authors", endpoint="authors")
-api.add_resource(AuthorByID, "/authors/<int:id>")
+api.add_resource(AuthorByID, "/authors/<int:id>", endpoint="authors/<int:id>")
 api.add_resource(Books, "/books", endpoint="books")
-api.add_resource(BookByID, "/books/<int:id>")
+api.add_resource(BookByID, "/books/<int:id>", endpoint="books/<int:id>")
 
 
 @app.route("/")
