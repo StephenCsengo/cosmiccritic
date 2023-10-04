@@ -1,20 +1,13 @@
 #!/usr/bin/env python3
 
-# Standard library imports
-
-# Remote library imports
 from flask import request, session, make_response
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 from flask_marshmallow import Marshmallow
 
-# Local imports
 from config import app, db, api
-
-# Add your model imports
 from models import User, Book, Review, Author
 
-app.secret_key = b"?w\x85Z\x08Q\xbdO\xb8\xa9\xb65Kj\xa9_"
 
 ma = Marshmallow(app)
 
@@ -107,6 +100,7 @@ class Signup(Resource):
         try:
             db.session.add(user)
             db.session.commit()
+            session["user_id"] = user.id
             return user_schema.dump(user), 201
 
         except IntegrityError:
@@ -198,6 +192,28 @@ class BookByID(Resource):
             return {"message": "Book not found"}, 404
 
 
+class BooksByAuthorID(Resource):
+    def get(self, author_id):
+        books = Book.query.filter(Book.author_id == author_id).all()
+
+        if books:
+            return many_books_schema.dump(books), 200
+        else:
+            return {"message": "No books by this author"}, 404
+
+
+class ReviewsByBookID(Resource):
+    def get(self, book_id):
+        reviews = Review.query.filter(Review.book_id == book_id).all()
+
+        if reviews:
+            return many_reviews_schema.dump(reviews), 200
+        else:
+            return {"message": "No reviews for book"}, 404
+
+
+api.add_resource(Login, "/login", endpoint="login")
+api.add_resource(Logout, "/logout", endpoint="logout")
 api.add_resource(Signup, "/signup", endpoint="signup")
 api.add_resource(Reviews, "/reviews", endpoint="reviews")
 api.add_resource(ReviewByID, "/reviews/<int:id>", endpoint="reviews/<int:id>")
@@ -207,8 +223,16 @@ api.add_resource(Authors, "/authors", endpoint="authors")
 api.add_resource(AuthorByID, "/authors/<int:id>", endpoint="authors/<int:id>")
 api.add_resource(Books, "/books", endpoint="books")
 api.add_resource(BookByID, "/books/<int:id>", endpoint="books/<int:id>")
-api.add_resource(Login, "/login", endpoint="login")
-api.add_resource(Logout, "/logout", endpoint="logout")
+api.add_resource(
+    ReviewsByBookID,
+    "/books/<int:book_id>/reviews",
+    endpoint="books/<int:book_id>/reviews",
+)
+api.add_resource(
+    BooksByAuthorID,
+    "/authors/<int:author_id>/books",
+    endpoint="author/<int:author_id>/books",
+)
 
 
 @app.route("/")
