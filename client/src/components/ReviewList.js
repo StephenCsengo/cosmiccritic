@@ -17,8 +17,9 @@ function ReviewList() {
   console.log(reviews);
   return reviews.map((review) => (
     <Grid item xs={12} md={4} key={review.id}>
-      <p>{review.review}</p>
       <p>Rating: {review.rating}</p>
+      <p>By {review.user.username}</p>
+      <p>{review.review}</p>
     </Grid>
   ));
 }
