@@ -330,7 +330,7 @@ if __name__ == "__main__":
             user = rc(User.query.all())
 
             add_review = Review(
-                rating=rc(range(10)),
+                rating=rc(range(5)),
                 review=fake.text(),
                 user_id=user.id,
                 book=rc(Book.query.all()),
