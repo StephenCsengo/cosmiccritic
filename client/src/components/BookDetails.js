@@ -23,6 +23,7 @@ function BookDetails() {
           <h2>{book.title}</h2>
           <p>By {author}</p>
           <p>{book.desc}</p>
+          <h3>Average Rating</h3>
           <Rating
             name="average-rating"
             value={avgRating}

@@ -10,11 +10,42 @@ import {
   TableRow,
   TablePagination,
   Button,
+  Grid,
+  TextField,
 } from "@mui/material";
+import Fuse from "fuse.js";
 
 function BookList({ books, onBookClick }) {
+  const [query, setQuery] = useState("");
+  const fuse = new Fuse(books, {
+    keys: ["title", "author.name"],
+  });
+
+  const results = fuse.search(query);
+  console.log(results);
+
+  const bookList = query ? results.map((book) => book.item) : books;
+
+  console.log(bookList);
+
+  function handleOnSearch({ currentTarget = {} }) {
+    const { value } = currentTarget;
+    setQuery(value);
+  }
   return (
     <Container>
+      <Grid container>
+        <Grid item>
+          <TextField
+            id="search"
+            label="search"
+            variant="outlined"
+            autoComplete="off"
+            value={query}
+            onChange={handleOnSearch}
+          />
+        </Grid>
+      </Grid>
       <TableContainer>
         <Table>
           <TableHead>
@@ -27,7 +58,7 @@ function BookList({ books, onBookClick }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {books.map((book) => (
+            {bookList.map((book) => (
               <TableRow key={book.title}>
                 <TableCell component="th" scope="row">
                   {book.title}
