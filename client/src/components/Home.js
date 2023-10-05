@@ -8,8 +8,9 @@ import {
   ImageListItem,
 } from "@mui/material";
 
-function Home({ books }) {
+function Home({ books, user }) {
   let imageList = books.slice(4, 10);
+  console.log(user);
   return (
     <Container>
       <Grid container>
@@ -19,7 +20,7 @@ function Home({ books }) {
             Keep track of your thoughts on science fiction novels and discover
             your next great adventure.
           </p>
-          <Link to="/signup" exact>
+          <Link to="/signup">
             <Button variant="contained">Sign Up</Button>
           </Link>
           <p>

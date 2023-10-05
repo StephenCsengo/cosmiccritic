@@ -46,8 +46,9 @@ function SignUp({ updateUser }) {
                 label="Username"
                 variant="outlined"
                 onChange={formik.handleChange}
-                value={formik.values.email}
+                value={formik.values.username}
               />
+              {formik.errors.username ? <p>{formik.errors.username}</p> : null}
               <TextField
                 required
                 id="password"
@@ -57,6 +58,7 @@ function SignUp({ updateUser }) {
                 onChange={formik.handleChange}
                 value={formik.values.password}
               />
+              {formik.errors.password ? <p>{formik.errors.password}</p> : null}
               <input type="submit" />
             </form>
           </Grid>
