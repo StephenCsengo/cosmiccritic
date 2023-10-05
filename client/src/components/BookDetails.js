@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Grid, Container, Button } from "@mui/material";
+import ReviewList from "./ReviewList";
 
 function BookDetails() {
   const { id } = useParams();
@@ -29,6 +30,12 @@ function BookDetails() {
         <Grid item xs={4}>
           <img src={book.cover_image} alt={book.title} />
         </Grid>
+      </Grid>
+      <Grid container>
+        <Grid item xs={12}>
+          <h3>Reviews</h3>
+        </Grid>
+        <ReviewList />
       </Grid>
     </Container>
   );
