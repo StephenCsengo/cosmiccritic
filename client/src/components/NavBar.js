@@ -14,8 +14,12 @@ function NavBar() {
             alignItems="center"
           >
             <h1>CosmicCritic</h1>
-            <Button color="inherit">Home</Button>
-            <Button color="inherit">Browse Books</Button>
+            <NavLink to="/" exact>
+              <Button color="inherit">Home</Button>
+            </NavLink>
+            <NavLink to="/booklist">
+              <Button color="inherit">Browse Books</Button>
+            </NavLink>
           </Grid>
           <Grid
             container

@@ -19,8 +19,15 @@ function App() {
   return (
     <div className="app">
       <NavBar />
-      <Home books={books} />
-      <BookList books={books} />
+
+      <Switch>
+        <Route path="/booklist">
+          <BookList books={books} />
+        </Route>
+        <Route exact path="/">
+          <Home books={books} />
+        </Route>
+      </Switch>
     </div>
   );
 }
