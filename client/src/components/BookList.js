@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Container,
   Table,
@@ -11,7 +12,7 @@ import {
   Button,
 } from "@mui/material";
 
-function BookList({ books }) {
+function BookList({ books, onBookClick }) {
   return (
     <Container>
       <TableContainer>
@@ -35,7 +36,14 @@ function BookList({ books }) {
                 <TableCell align="center">{book.page_count}</TableCell>
                 <TableCell align="center">{book.publish_year}</TableCell>
                 <TableCell align="center">
-                  <Button variant="contained">View Details</Button>
+                  <Link to={`/bookdetails/${book.id}`}>
+                    <Button
+                      variant="contained"
+                      onClick={() => onBookClick(book)}
+                    >
+                      View Details
+                    </Button>
+                  </Link>
                 </TableCell>
               </TableRow>
             ))}

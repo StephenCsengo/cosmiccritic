@@ -4,12 +4,3 @@
   --link: #61dafb;
   --text: hsla(0, 0%, 100%, 0.88);
 }
-
-body {
-  color: white;
-  background: #161e37;
-}
-
-header {
-  background-color: #939393 !important;
-}

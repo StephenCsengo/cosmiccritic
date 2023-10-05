@@ -8,9 +8,7 @@ import {
 } from "@mui/material";
 
 function Home({ books }) {
-  console.log(books[0]);
   let imageList = books.slice(4, 10);
-  console.log(imageList);
   return (
     <Container>
       <Grid container>
