@@ -15,7 +15,6 @@ function BookDetails() {
         setAuthor(data.author.name);
       });
   }, []);
-  console.log(author);
   return (
     <Container>
       <Grid container>

@@ -13,8 +13,11 @@ function ReviewList() {
         setReviews(data);
       });
   }, []);
+  const ratings = reviews.map((review) => review.rating);
+  const avgRating = ratings.reduce((a, b) => a + b, 0) / ratings.length;
 
-  console.log(reviews);
+  console.log(avgRating);
+
   return reviews.map((review) => (
     <Grid item xs={12} md={4} key={review.id}>
       <p>Rating: {review.rating}</p>
