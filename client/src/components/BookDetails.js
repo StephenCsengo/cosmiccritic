@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Grid, Container, Button } from "@mui/material";
+import { Grid, Container, Button, Rating } from "@mui/material";
 import ReviewList from "./ReviewList";
 
 function BookDetails() {
@@ -23,7 +23,12 @@ function BookDetails() {
           <h2>{book.title}</h2>
           <p>By {author}</p>
           <p>{book.desc}</p>
-          <p>{avgRating}</p>
+          <Rating
+            name="average-rating"
+            value={avgRating}
+            precision={0.5}
+            readOnly
+          />
           <h3>Details</h3>
           <p>{book.page_count} pages</p>
           <p>Published in {book.publish_year}</p>
