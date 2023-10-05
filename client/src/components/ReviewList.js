@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Grid, Container, Button } from "@mui/material";
 
-function ReviewList() {
+function ReviewList({ setAvgRating }) {
   const { id } = useParams();
   const [reviews, setReviews] = useState([]);
 
@@ -17,11 +17,12 @@ function ReviewList() {
   const avgRating = ratings.reduce((a, b) => a + b, 0) / ratings.length;
 
   console.log(avgRating);
-
+  setAvgRating(avgRating);
   return reviews.map((review) => (
     <Grid item xs={12} md={4} key={review.id}>
-      <p>Rating: {review.rating}</p>
-      <p>By {review.user.username}</p>
+      <p>
+        Rating: {review.rating} By {review.user.username}
+      </p>
       <p>{review.review}</p>
     </Grid>
   ));

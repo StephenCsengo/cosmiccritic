@@ -7,6 +7,7 @@ function BookDetails() {
   const { id } = useParams();
   const [book, setBook] = useState([]);
   const [author, setAuthor] = useState(null);
+  const [avgRating, setAvgRating] = useState(null);
   useEffect(() => {
     fetch(`/books/${id}`)
       .then((response) => response.json())
@@ -22,6 +23,7 @@ function BookDetails() {
           <h2>{book.title}</h2>
           <p>By {author}</p>
           <p>{book.desc}</p>
+          <p>{avgRating}</p>
           <h3>Details</h3>
           <p>{book.page_count} pages</p>
           <p>Published in {book.publish_year}</p>
@@ -34,7 +36,7 @@ function BookDetails() {
         <Grid item xs={12}>
           <h3>Reviews</h3>
         </Grid>
-        <ReviewList />
+        <ReviewList setAvgRating={setAvgRating} />
       </Grid>
     </Container>
   );
