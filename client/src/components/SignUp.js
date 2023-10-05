@@ -46,6 +46,7 @@ function SignUp({ updateUser }) {
                 label="Username"
                 variant="outlined"
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 value={formik.values.username}
               />
               {formik.errors.username ? <p>{formik.errors.username}</p> : null}
@@ -56,6 +57,7 @@ function SignUp({ updateUser }) {
                 type="password"
                 variant="outlined"
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 value={formik.values.password}
               />
               {formik.errors.password ? <p>{formik.errors.password}</p> : null}

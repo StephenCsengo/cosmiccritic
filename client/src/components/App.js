@@ -5,6 +5,7 @@ import Home from "./Home.js";
 import BookList from "./BookList.js";
 import BookDetails from "./BookDetails.js";
 import SignUp from "./SignUp.js";
+import Login from "./Login.js";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -22,10 +23,9 @@ function App() {
   function handleBookClick(book) {
     console.log(`${book.id} was clicked`);
   }
-
   const handleUpdateUser = (user) => {
     setUser(user);
-    console.log(user);
+    console.log("From app: ", user);
   };
   return (
     <div className="app">
@@ -36,13 +36,16 @@ function App() {
           <BookList books={books} onBookClick={handleBookClick} />
         </Route>
         <Route exact path="/">
-          <Home books={books} />
+          <Home books={books} user={user} />
         </Route>
         <Route exact path="/bookdetails/:id">
           <BookDetails />
         </Route>
         <Route exact path="/signup">
           <SignUp updateUser={handleUpdateUser} />
+        </Route>
+        <Route exact path="/login">
+          <Login updateUser={handleUpdateUser} />
         </Route>
       </Switch>
     </div>

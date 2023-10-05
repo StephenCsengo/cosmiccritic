@@ -10,12 +10,13 @@ import {
 
 function Home({ books, user }) {
   let imageList = books.slice(4, 10);
-  console.log(user);
+  console.log("From home:", user);
   return (
     <Container>
       <Grid container>
         <Grid item xs={8} md={6}>
           <h2>Don't Get Lost In Space</h2>
+          {user ? <h2>Welcome {user.username}</h2> : null}
           <p>
             Keep track of your thoughts on science fiction novels and discover
             your next great adventure.
