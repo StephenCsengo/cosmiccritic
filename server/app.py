@@ -69,6 +69,15 @@ review_schema = ReviewSchema()
 many_reviews_schema = ReviewSchema(many=True)
 
 
+class cookieTest(Resource):
+    def get(self):
+        session["user_id"] = 5
+        user = User.query.filter(User.id == session["user_id"]).first()
+        import ipdb
+
+        ipdb.set_trace()
+
+
 class Login(Resource):
     def post(self):
         json = request.get_json()
@@ -91,20 +100,7 @@ class Logout(Resource):
 
 
 class Signup(Resource):
-    def post(self):
-        json = request.get_json()
-
-        user = User(username=json.get("username"))
-        user.password_hash = json.get("password")
-
-        try:
-            db.session.add(user)
-            db.session.commit()
-            session["user_id"] = user.id
-            return user_schema.dump(user), 201
-
-        except IntegrityError:
-            return {"message": "401: Unauthorized"}, 401
+    pass
 
 
 class CheckSession(Resource):
@@ -149,6 +145,21 @@ class Users(Resource):
         )
 
         return response
+
+    def post(self):
+        json = request.get_json()
+
+        user = User(username=json.get("username"))
+        user.password_hash = json.get("password")
+
+        try:
+            db.session.add(user)
+            db.session.commit()
+            session["user_id"] = user.id
+            return user_schema.dump(user), 201
+
+        except IntegrityError:
+            return {"message": "401: Unauthorized"}, 401
 
 
 class UserByID(Resource):
@@ -230,6 +241,8 @@ class ReviewsByUserID(Resource):
         else:
             return {"message": "No reviews by user"}, 404
 
+
+api.add_resource(cookieTest, "/cookie")
 
 api.add_resource(Login, "/login", endpoint="login")
 api.add_resource(Logout, "/logout", endpoint="logout")

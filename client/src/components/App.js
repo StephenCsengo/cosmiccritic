@@ -4,6 +4,7 @@ import NavBar from "./NavBar.js";
 import Home from "./Home.js";
 import BookList from "./BookList.js";
 import BookDetails from "./BookDetails.js";
+import SignUp from "./SignUp.js";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -22,6 +23,9 @@ function App() {
     console.log(`${book.id} was clicked`);
   }
 
+  const updateUser = () => {
+    setUser(user);
+  };
   return (
     <div className="app">
       <NavBar />
@@ -35,6 +39,9 @@ function App() {
         </Route>
         <Route exact path="/bookdetails/:id">
           <BookDetails />
+        </Route>
+        <Route exact path="/signup">
+          <SignUp updateUser={updateUser} />
         </Route>
       </Switch>
     </div>
