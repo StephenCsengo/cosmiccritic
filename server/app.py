@@ -107,6 +107,15 @@ class Signup(Resource):
             return {"message": "401: Unauthorized"}, 401
 
 
+class CheckSession(Resource):
+    def get(self):
+        user = User.query.filter(User.id == session.get("user_id")).first()
+        if user:
+            return user_schema.dump(user), 200
+        else:
+            return {"message": "401: Unauthorized"}, 401
+
+
 class Reviews(Resource):
     def get(self):
         reviews = Review.query.all()
@@ -215,6 +224,7 @@ class ReviewsByBookID(Resource):
 api.add_resource(Login, "/login", endpoint="login")
 api.add_resource(Logout, "/logout", endpoint="logout")
 api.add_resource(Signup, "/signup", endpoint="signup")
+api.add_resource(CheckSession, "/checksession", endpoint="checksession")
 api.add_resource(Reviews, "/reviews", endpoint="reviews")
 api.add_resource(ReviewByID, "/reviews/<int:id>", endpoint="reviews/<int:id>")
 api.add_resource(Users, "/users", endpoint="users")
