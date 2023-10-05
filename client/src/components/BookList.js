@@ -18,7 +18,7 @@ import Fuse from "fuse.js";
 function BookList({ books, onBookClick }) {
   const [query, setQuery] = useState("");
   const fuse = new Fuse(books, {
-    keys: ["title", "author.name"],
+    keys: ["title", "author.name", "publish_year"],
   });
 
   const results = fuse.search(query);
