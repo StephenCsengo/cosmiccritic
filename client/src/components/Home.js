@@ -20,7 +20,7 @@ function Home({ books }) {
             Keep track of your thoughts on science fiction novels and discover
             your next great adventure.
           </p>
-          <Button color="inherit">Sign Up</Button>
+          <Button variant="contained">Sign Up</Button>
           <p>
             Already have an account? <a href="/">Login</a>
           </p>

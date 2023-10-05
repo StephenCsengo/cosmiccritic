@@ -4,8 +4,8 @@ import { AppBar, Container, Grid, Menu, Toolbar, Button } from "@mui/material";
 
 function NavBar() {
   return (
-    <Container>
-      <AppBar position="static">
+    <AppBar position="static">
+      <Container>
         <Toolbar>
           <Grid
             container
@@ -27,8 +27,8 @@ function NavBar() {
             <Button color="inherit">Login</Button>
           </Grid>
         </Toolbar>
-      </AppBar>
-    </Container>
+      </Container>
+    </AppBar>
   );
 }
 
