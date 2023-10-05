@@ -23,8 +23,9 @@ function App() {
     console.log(`${book.id} was clicked`);
   }
 
-  const updateUser = () => {
+  const handleUpdateUser = (user) => {
     setUser(user);
+    console.log(user);
   };
   return (
     <div className="app">
@@ -41,7 +42,7 @@ function App() {
           <BookDetails />
         </Route>
         <Route exact path="/signup">
-          <SignUp updateUser={updateUser} />
+          <SignUp updateUser={handleUpdateUser} />
         </Route>
       </Switch>
     </div>

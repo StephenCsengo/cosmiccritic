@@ -27,7 +27,9 @@ function NavBar() {
             justifyContent="flex-end"
             alignItems="center"
           >
-            <Button color="inherit">Sign Up</Button>
+            <NavLink to="/signup" exact>
+              <Button color="inherit">Sign Up</Button>
+            </NavLink>
             <Button color="inherit">Login</Button>
           </Grid>
         </Toolbar>

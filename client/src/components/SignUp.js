@@ -1,7 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container, Grid, TextField } from "@mui/material";
+import { useFormik } from "formik";
+import * as yup from "yup";
 
 function SignUp({ updateUser }) {
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      password: "",
+    },
+    validationSchema: yup.object({
+      username: yup.string().required("Username required"),
+      password: yup
+        .string()
+        .min(10, "Password must be at least 10 characters")
+        .required("Password required"),
+    }),
+    onSubmit: (values) => {
+      fetch("/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      }).then((res) => {
+        if (res.status == 200) {
+          const userData = res.json();
+          updateUser(userData);
+        }
+      });
+    },
+  });
   return (
     <Container>
       <Grid container>
@@ -10,13 +39,14 @@ function SignUp({ updateUser }) {
         </Grid>
         <Grid>
           <Grid item xs={12} md={6}>
-            <form>
+            <form onSubmit={formik.handleSubmit}>
               <TextField
                 required
                 id="username"
                 label="Username"
                 variant="outlined"
-                onChange={console.log}
+                onChange={formik.handleChange}
+                value={formik.values.email}
               />
               <TextField
                 required
@@ -24,7 +54,8 @@ function SignUp({ updateUser }) {
                 label="Password"
                 type="password"
                 variant="outlined"
-                onChange={console.log}
+                onChange={formik.handleChange}
+                value={formik.values.password}
               />
               <input type="submit" />
             </form>

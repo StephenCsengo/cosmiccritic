@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Grid,
   Container,
@@ -18,7 +19,9 @@ function Home({ books }) {
             Keep track of your thoughts on science fiction novels and discover
             your next great adventure.
           </p>
-          <Button variant="contained">Sign Up</Button>
+          <Link to="/signup" exact>
+            <Button variant="contained">Sign Up</Button>
+          </Link>
           <p>
             Already have an account? <a href="/">Login</a>
           </p>
