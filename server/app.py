@@ -221,6 +221,16 @@ class ReviewsByBookID(Resource):
             return {"message": "No reviews for book"}, 404
 
 
+class ReviewsByUserID(Resource):
+    def get(self, user_id):
+        reviews = Review.query.filter(Review.user_id == user_id).all()
+
+        if reviews:
+            return many_reviews_schema.dump(reviews), 200
+        else:
+            return {"message": "No reviews by user"}, 404
+
+
 api.add_resource(Login, "/login", endpoint="login")
 api.add_resource(Logout, "/logout", endpoint="logout")
 api.add_resource(Signup, "/signup", endpoint="signup")
@@ -242,6 +252,11 @@ api.add_resource(
     BooksByAuthorID,
     "/authors/<int:author_id>/books",
     endpoint="author/<int:author_id>/books",
+)
+api.add_resource(
+    ReviewsByUserID,
+    "/users/<int:user_id>/reviews",
+    endpoint="users/<int:user_id>/reviews",
 )
 
 
