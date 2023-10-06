@@ -5,14 +5,14 @@ import { useFormik, Form, Field } from "formik";
 import * as yup from "yup";
 import { useHistory } from "react-router-dom/";
 
-function RatingForm({ user, book }) {
+function RatingForm({ user, book, rating = 0, review = "" }) {
   const history = useHistory();
   const formik = useFormik({
     initialValues: {
       user_id: user.id,
       book_id: book,
-      rating: 0,
-      review: "",
+      rating: rating,
+      review: review,
     },
     validateSchema: yup.object({
       user_id: yup.number().required("UserID required.").integer(),

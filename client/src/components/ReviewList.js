@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Grid, Container, Button, Rating } from "@mui/material";
 import ReviewCard from "./ReviewCard.js";
 
-function ReviewList({ user, setAvgRating }) {
+function ReviewList({ user, setAvgRating, setHasReviewed }) {
   const { id } = useParams();
   const [reviews, setReviews] = useState([]);
 
@@ -24,7 +24,7 @@ function ReviewList({ user, setAvgRating }) {
 
   return reviews.map((review) => (
     <Grid item xs={12} md={4} key={review.id}>
-      <ReviewCard review={review} user={user} />
+      <ReviewCard review={review} user={user} setHasReviewed={setHasReviewed} />
     </Grid>
   ));
 }
