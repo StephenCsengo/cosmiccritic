@@ -7,22 +7,15 @@ import {
   TableContainer,
   TableRow,
   TableCell,
+  Table,
+  TableHead,
+  TableBody,
 } from "@mui/material";
 
-function UserProfile({ user }) {
+function UserProfile({ user, userReviews }) {
   console.log("From userprofile: ", user);
-  const [reviews, setReviews] = useState([]);
 
-  useEffect(() => {
-    if (user !== null) {
-      fetch(`/users/${user.id}/reviews`)
-        .then((response) => response.json())
-        .then((data) => {
-          setReviews(data);
-        });
-    }
-  }, []);
-  console.log(reviews);
+  console.log("From userprofile: ", userReviews);
 
   return (
     <>
@@ -34,15 +27,42 @@ function UserProfile({ user }) {
               <h2>Your Reviews</h2>
             </Grid>
             <Grid item>
-              {reviews ? (
-                <p>You have some reviews</p>
+              {userReviews ? (
+                <TableContainer>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Book</TableCell>
+                        <TableCell>Author</TableCell>
+                        <TableCell>Rating</TableCell>
+                        <TableCell>Review</TableCell>
+                        <TableCell></TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {userReviews.map((review) => (
+                        <TableRow key={review.book.title}>
+                          <TableCell>{review.book.title}</TableCell>
+                          <TableCell>{review.book.author.name}</TableCell>
+                          <TableCell>{review.rating}</TableCell>
+                          <TableCell>{review.review}</TableCell>
+                          <TableCell>
+                            <Button>Edit review</Button>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
               ) : (
                 <p>No reviews to show</p>
               )}
             </Grid>
           </Grid>
         </Container>
-      ) : null}
+      ) : (
+        <p>No reviews to show</p>
+      )}
       ;
     </>
   );
