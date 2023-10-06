@@ -4,7 +4,7 @@ import { Grid, Container, Button } from "@mui/material";
 
 function UserProfile({ user }) {
   console.log(user);
-  return <h1>User profile for {user.username}</h1>;
+  return <h1>User Profile</h1>;
 }
 
 export default UserProfile;
