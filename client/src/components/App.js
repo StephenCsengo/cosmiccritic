@@ -7,6 +7,7 @@ import BookDetails from "./BookDetails.js";
 import SignUp from "./SignUp.js";
 import Login from "./Login.js";
 import UserProfile from "./UserProfile.js";
+import EditReview from "./EditReview.js";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -62,6 +63,9 @@ function App() {
         </Route>
         <Route exact path="/userprofile/">
           <UserProfile user={user} />
+        </Route>
+        <Route exact path="/editreview">
+          <EditReview />
         </Route>
       </Switch>
     </div>

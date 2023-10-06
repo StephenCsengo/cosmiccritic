@@ -89,7 +89,7 @@ function BookList({ books, onBookClick }) {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={(5, 10, 20)}
+        rowsPerPageOptions={[5, 10, 20]}
         component="div"
         rowsPerPage={rows}
         count={bookList.length}

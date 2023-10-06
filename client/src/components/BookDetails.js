@@ -39,7 +39,7 @@ function BookDetails({ user }) {
           <p>Published in {book.publish_year}</p>
         </Grid>
         <Grid item xs={4}>
-          <img src={book.cover_image} alt={book.title} />
+          <img className="bookimg" src={book.cover_image} alt={book.title} />
         </Grid>
       </Grid>
       <Grid container>

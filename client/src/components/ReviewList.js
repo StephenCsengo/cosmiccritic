@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Grid, Container, Button } from "@mui/material";
+import { Grid, Container, Button, Rating } from "@mui/material";
+import ReviewCard from "./ReviewCard.js";
 
 function ReviewList({ user, setAvgRating }) {
   const { id } = useParams();
@@ -23,10 +24,7 @@ function ReviewList({ user, setAvgRating }) {
 
   return reviews.map((review) => (
     <Grid item xs={12} md={4} key={review.id}>
-      <p>
-        Rating: {review.rating} By {review.user.username}
-      </p>
-      <p>{review.review}</p>
+      <ReviewCard review={review} user={user} />
     </Grid>
   ));
 }

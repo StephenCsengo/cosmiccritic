@@ -4,3 +4,10 @@
   --link: #61dafb;
   --text: hsla(0, 0%, 100%, 0.88);
 }
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.bookimg {
+  width: 15rem;
+}
