@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Grid, Container, Button, Rating } from "@mui/material";
 import ReviewList from "./ReviewList";
+import RatingForm from "./RatingForm";
 
-function BookDetails() {
+function BookDetails({ user }) {
   const { id } = useParams();
   const [book, setBook] = useState([]);
   const [author, setAuthor] = useState(null);
@@ -39,6 +40,12 @@ function BookDetails() {
         </Grid>
       </Grid>
       <Grid container>
+        {user ? (
+          <Grid item xs={12}>
+            <RatingForm user={user} book={id} />
+          </Grid>
+        ) : null}
+
         <Grid item xs={12}>
           <h3>Reviews</h3>
         </Grid>

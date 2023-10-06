@@ -13,26 +13,6 @@ function NavBar({ user, updateUser }) {
     });
     history.push("/loginform");
   };
-
-  const loggedin = (
-    <Grid>
-      <Button color="inherit">My Profile</Button>
-      <Button color="inherit" onClick={handleLogout}>
-        Logout
-      </Button>
-    </Grid>
-  );
-
-  const loggedout = (
-    <Grid>
-      <NavLink to="/signup" exact>
-        <Button color="inherit">Sign Up</Button>
-      </NavLink>
-      <NavLink to="/loginform">
-        <Button color="inherit">Login</Button>
-      </NavLink>
-    </Grid>
-  );
   return (
     <AppBar position="static">
       <Container>
@@ -44,12 +24,6 @@ function NavBar({ user, updateUser }) {
             alignItems="center"
           >
             <h1>CosmicCritic</h1>
-            <NavLink to="/" exact>
-              <Button color="inherit">Home</Button>
-            </NavLink>
-            <NavLink to="/booklist">
-              <Button color="inherit">Browse Books</Button>
-            </NavLink>
           </Grid>
           <Grid
             container
@@ -57,7 +31,29 @@ function NavBar({ user, updateUser }) {
             justifyContent="flex-end"
             alignItems="center"
           >
-            {user ? loggedin : loggedout}
+            <NavLink to="/" exact>
+              <Button color="inherit">Home</Button>
+            </NavLink>
+            <NavLink to="/booklist">
+              <Button color="inherit">Browse Books</Button>
+            </NavLink>
+            {user ? (
+              <Grid>
+                <Button color="inherit">My Profile</Button>
+                <Button color="inherit" onClick={handleLogout}>
+                  Logout
+                </Button>
+              </Grid>
+            ) : (
+              <Grid>
+                <NavLink to="/signup" exact>
+                  <Button color="inherit">Sign Up</Button>
+                </NavLink>
+                <NavLink to="/loginform">
+                  <Button color="inherit">Login</Button>
+                </NavLink>
+              </Grid>
+            )}
           </Grid>
         </Toolbar>
       </Container>

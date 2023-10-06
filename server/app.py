@@ -123,7 +123,22 @@ class Reviews(Resource):
         return response
 
     def post(self):
-        pass
+        json = request.get_json()
+
+        new_rating = Review(
+            user_id=json.get("user_id"),
+            book_id=json.get("book_id"),
+            rating=json.get("rating"),
+            review=json.get("review"),
+        )
+
+        try:
+            db.session.add(new_rating)
+            db.session.commit()
+            return review_schema.dump(new_rating), 201
+
+        except IntegrityError:
+            return {"message": "401: Unauthorized"}, 401
 
 
 class ReviewByID(Resource):

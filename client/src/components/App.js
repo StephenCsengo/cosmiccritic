@@ -51,7 +51,7 @@ function App() {
           <Home books={books} user={user} />
         </Route>
         <Route exact path="/bookdetails/:id">
-          <BookDetails />
+          <BookDetails user={user} />
         </Route>
         <Route exact path="/signup">
           <SignUp updateUser={handleUpdateUser} />
