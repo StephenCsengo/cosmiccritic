@@ -4,6 +4,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import validates
 from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy import CheckConstraint
 
 from config import db, bcrypt
 
@@ -67,10 +68,16 @@ class Review(db.Model):
     __tablename__ = "reviews"
 
     id = db.Column(db.Integer, primary_key=True)
-    rating = db.Column(db.Integer)
+    rating = db.Column(db.Integer, CheckConstraint("rating >= 0 AND rating <=5"))
     review = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     book_id = db.Column(db.Integer, db.ForeignKey("books.id"), nullable=False)
+
+    @validates("rating")
+    def validate_rating(self, key, rating):
+        if rating < 0 or rating > 5:
+            raise ValueError("Rating outside of range")
+        return rating
 
     def __repr__(self):
         return f"<Rating: {self.rating}, Review: {self.review} by user #{self.user_id} of book #{self.book_id}>"

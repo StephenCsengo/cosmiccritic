@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container, Grid, Rating, TextField } from "@mui/material";
 
-import { useFormik } from "formik";
+import { useFormik, Form, Field } from "formik";
 import * as yup from "yup";
 import { useHistory } from "react-router-dom/";
-import { bool } from "prop-types";
 
 function RatingForm({ user, book }) {
+  const history = useHistory();
   const formik = useFormik({
     initialValues: {
       user_id: user.id,
@@ -17,7 +17,12 @@ function RatingForm({ user, book }) {
     validateSchema: yup.object({
       user_id: yup.number().required("UserID required.").integer(),
       book_id: yup.number().required("BookID required.").integer(),
-      rating: yup.number().required("Rating required.").integer(),
+      rating: yup
+        .number()
+        .min(0)
+        .max(5)
+        .required("Rating between 0 and 5 required.")
+        .integer(),
       review: yup.string().nullable(),
     }),
     onSubmit: (values) => {
@@ -36,36 +41,38 @@ function RatingForm({ user, book }) {
   });
 
   return (
-    <Container>
-      <Grid container>
-        <Grid item>
-          <h3>Add Your Review</h3>
-          <form onSubmit={formik.handleSubmit}>
-            <TextField
-              required
-              id="rating"
-              label="Rating"
-              variant="outlined"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.rating}
-            />
-            {formik.touched.rating && formik.errors.rating ? (
-              <p>{formik.errors.rating}</p>
-            ) : null}
-            <TextField
-              id="review"
-              label="Review"
-              variant="outlined"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.review}
-            />
-            <input type="submit" />
-          </form>
-        </Grid>
+    <Grid container>
+      <Grid item>
+        <h3>Add Your Review</h3>
+        <form onSubmit={formik.handleSubmit}>
+          <TextField
+            required
+            id="rating"
+            label="Rating (0-5)"
+            variant="outlined"
+            autoComplete="off"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.rating}
+          />
+
+          {formik.touched.rating && formik.errors.rating ? (
+            <p>{formik.errors.rating}</p>
+          ) : null}
+          <TextField
+            id="review"
+            label="Review"
+            variant="outlined"
+            multiline
+            rows={4}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.review}
+          />
+          <input type="submit" />
+        </form>
       </Grid>
-    </Container>
+    </Grid>
   );
 }
 export default RatingForm;
