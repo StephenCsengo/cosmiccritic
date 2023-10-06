@@ -29,7 +29,7 @@ function App() {
   };
   return (
     <div className="app">
-      <NavBar />
+      <NavBar user={user} />
 
       <Switch>
         <Route path="/booklist">
@@ -44,7 +44,7 @@ function App() {
         <Route exact path="/signup">
           <SignUp updateUser={handleUpdateUser} />
         </Route>
-        <Route exact path="/login">
+        <Route exact path="/loginform">
           <Login updateUser={handleUpdateUser} />
         </Route>
       </Switch>

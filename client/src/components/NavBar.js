@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { AppBar, Container, Grid, Menu, Toolbar, Button } from "@mui/material";
 
-function NavBar() {
+function NavBar({ user }) {
   return (
     <AppBar position="static">
       <Container>
@@ -30,7 +30,9 @@ function NavBar() {
             <NavLink to="/signup" exact>
               <Button color="inherit">Sign Up</Button>
             </NavLink>
-            <Button color="inherit">Login</Button>
+            <NavLink to="/loginform">
+              <Button color="inherit">Login</Button>
+            </NavLink>
           </Grid>
         </Toolbar>
       </Container>
