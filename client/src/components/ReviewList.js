@@ -17,16 +17,26 @@ function ReviewList({ user, setAvgRating, setHasReviewed }) {
 
   //Send average rating back to BookDetails
   useEffect(() => {
-    const ratings = reviews.map((review) => review.rating);
-    const avgRating = ratings.reduce((a, b) => a + b, 0) / ratings.length;
-    setAvgRating(avgRating);
+    if (Array.isArray(reviews) && reviews.length !== 0) {
+      const ratings = reviews.map((review) => review.rating);
+      const avgRating = ratings.reduce((a, b) => a + b, 0) / ratings.length;
+      setAvgRating(avgRating);
+    }
   }, [reviews, setAvgRating]);
 
-  return reviews.map((review) => (
-    <Grid item xs={12} md={4} key={review.id}>
-      <ReviewCard review={review} user={user} setHasReviewed={setHasReviewed} />
-    </Grid>
-  ));
+  if (Array.isArray(reviews) && reviews.length !== 0) {
+    return reviews.map((review) => (
+      <Grid item xs={12} md={4} key={review.id}>
+        <ReviewCard
+          review={review}
+          user={user}
+          setHasReviewed={setHasReviewed}
+        />
+      </Grid>
+    ));
+  } else {
+    return <p>No reviews yet!</p>;
+  }
 }
 
 export default ReviewList;

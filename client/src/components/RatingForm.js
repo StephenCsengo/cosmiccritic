@@ -5,16 +5,16 @@ import { useFormik, Form, Field } from "formik";
 import * as yup from "yup";
 import { useHistory } from "react-router-dom/";
 
-function RatingForm({ user, book, rating = 0, review = "" }) {
+function RatingForm({ user, book }) {
   const history = useHistory();
   const formik = useFormik({
     initialValues: {
       user_id: user.id,
       book_id: book,
-      rating: rating,
-      review: review,
+      rating: 0,
+      review: "",
     },
-    validateSchema: yup.object({
+    validationSchema: yup.object({
       user_id: yup.number().required("UserID required.").integer(),
       book_id: yup.number().required("BookID required.").integer(),
       rating: yup
@@ -26,6 +26,7 @@ function RatingForm({ user, book, rating = 0, review = "" }) {
       review: yup.string().nullable(),
     }),
     onSubmit: (values) => {
+      console.log(values);
       fetch("/reviews", {
         method: "POST",
         headers: {
@@ -53,23 +54,22 @@ function RatingForm({ user, book, rating = 0, review = "" }) {
             min={0}
             max={5}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.rating}
           />
 
           {formik.touched.rating && formik.errors.rating ? (
             <p>{formik.errors.rating}</p>
           ) : null}
-          <TextField
+          <label htmlFor="review">Review</label>
+          <textarea
             id="review"
-            label="Review"
-            variant="outlined"
-            multiline
             rows={4}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.review}
           />
-          <input type="submit" />
+          <button type="submit">Submit Review</button>
         </form>
       </Grid>
     </Grid>

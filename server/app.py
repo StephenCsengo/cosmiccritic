@@ -150,6 +150,19 @@ class ReviewByID(Resource):
         else:
             return {"message": "Review not found"}, 404
 
+    def patch(self, id):
+        review = Review.query.filter_by(id=id).first()
+
+        if review:
+            for attr in request.form:
+                setattr(dog, attr, request.form[attr])
+            db.session.add(review)
+            db.session.commit()
+
+            return review_schema.dump(review), 200
+        else:
+            return {"message": "Review not found"}, 404
+
 
 class Users(Resource):
     def get(self):
