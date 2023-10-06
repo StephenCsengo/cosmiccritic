@@ -20,7 +20,7 @@ function NavBar({ user, updateUser }) {
     const user_id = user.id;
     userLinks = (
       <Grid>
-        <NavLink to={`/userprofile/${user_id}`}>
+        <NavLink to={"/userprofile/"}>
           <Button color="inherit">My Profile</Button>
         </NavLink>
         <Button color="inherit" onClick={handleLogout}>

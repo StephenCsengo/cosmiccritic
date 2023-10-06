@@ -9,7 +9,7 @@ import Login from "./Login.js";
 import UserProfile from "./UserProfile.js";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({ id: 1 });
   const [books, setBooks] = useState([]);
   const [errors, setErrors] = useState([]);
 
@@ -23,7 +23,7 @@ function App() {
     });
   };
 
-  //Fetch list of books
+  //Fetch user and list of books
   useEffect(() => {
     fetchUser();
     fetch("/books")
@@ -60,7 +60,7 @@ function App() {
         <Route exact path="/loginform">
           <Login updateUser={handleUpdateUser} />
         </Route>
-        <Route exact path="/userprofile/:id">
+        <Route exact path="/userprofile/">
           <UserProfile user={user} />
         </Route>
       </Switch>
