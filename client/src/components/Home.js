@@ -18,8 +18,12 @@ function Home({ books, user }) {
           <h2>Don't Get Lost In Space</h2>
           {user ? <h2>Welcome {user.username}</h2> : null}
           <p>
-            Keep track of your thoughts on science fiction novels and discover
-            your next great adventure.
+            Welcome to our hub for all things science fiction. Get ready to dive
+            into mind-bending stories that will take you on thrilling adventures
+            through the cosmos. Share your thoughts and connect with fellow
+            science fiction fans who are just as passionate about these
+            interstellar journeys as you are. Together, we'll explore galaxies,
+            encounter aliens, and unravel the mysteries of the universe.
           </p>
           {user ? (
             <Link to="/booklist">
@@ -27,11 +31,17 @@ function Home({ books, user }) {
             </Link>
           ) : (
             <div>
+              <p>
+                Join us now and let's embark on this cosmic adventure together!
+              </p>
               <Link to="/signup">
                 <Button variant="contained">Sign Up</Button>
               </Link>
               <p>
-                Already have an account? <a href="/">Login</a>
+                Already have an account?{" "}
+                <Link to="/loginform">
+                  <Button>Login</Button>
+                </Link>
               </p>
             </div>
           )}
