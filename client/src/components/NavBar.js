@@ -1,8 +1,17 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { AppBar, Container, Grid, Menu, Toolbar, Button } from "@mui/material";
 
-function NavBar({ user }) {
+function NavBar({ user, updateUser }) {
+  const history = useHistory();
+  const handleLogout = () => {
+    fetch("/logout", {
+      method: "DELETE",
+    }).then((response) => {
+      updateUser(null);
+    });
+    history.push("/loginform");
+  };
   return (
     <AppBar position="static">
       <Container>
@@ -33,6 +42,9 @@ function NavBar({ user }) {
             <NavLink to="/loginform">
               <Button color="inherit">Login</Button>
             </NavLink>
+            <Button color="inherit" onClick={handleLogout}>
+              Logout
+            </Button>
           </Grid>
         </Toolbar>
       </Container>

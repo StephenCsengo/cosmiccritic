@@ -29,7 +29,7 @@ function App() {
   };
   return (
     <div className="app">
-      <NavBar user={user} />
+      <NavBar user={user} updateUser={handleUpdateUser} />
 
       <Switch>
         <Route path="/booklist">
