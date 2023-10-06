@@ -11,6 +11,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [books, setBooks] = useState([]);
   const [errors, setErrors] = useState([]);
+  const [reviews, setReviews] = useState([]);
 
   const fetchUser = () => {
     fetch("/checksession").then((response) => {
@@ -22,6 +23,18 @@ function App() {
     });
   };
 
+  const fetchReviews = () => {
+    if (user !== null) {
+      fetch(`/users/${user.id}/reviews`).then((response) => {
+        if (response.ok) {
+          response.json().then((reviews) => setReviews(reviews));
+        } else {
+          response.json().then((errors) => setErrors(errors));
+        }
+      });
+    }
+  };
+
   //Fetch list of books
   useEffect(() => {
     fetchUser();
@@ -30,6 +43,7 @@ function App() {
       .then((data) => {
         setBooks(data);
       });
+    fetchReviews();
   }, []);
 
   function handleBookClick(book) {

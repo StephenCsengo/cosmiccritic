@@ -75,6 +75,7 @@ class Review(db.Model):
 
     @validates("rating")
     def validate_rating(self, key, rating):
+        rating = int(rating)
         if rating < 0 or rating > 5:
             raise ValueError("Rating outside of range")
         return rating

@@ -11,7 +11,7 @@ function RatingForm({ user, book }) {
     initialValues: {
       user_id: user.id,
       book_id: book,
-      rating: "",
+      rating: 0,
       review: "",
     },
     validateSchema: yup.object({
@@ -34,7 +34,7 @@ function RatingForm({ user, book }) {
         body: JSON.stringify(values),
       }).then((response) => {
         response.json().then((result) => {
-          console.log(result);
+          history.push(0);
         });
       });
     },
@@ -45,14 +45,14 @@ function RatingForm({ user, book }) {
       <Grid item>
         <h3>Add Your Review</h3>
         <form onSubmit={formik.handleSubmit}>
-          <TextField
-            required
+          <label htmlFor="rating">Rating</label>
+          <input
+            type="number"
             id="rating"
-            label="Rating (0-5)"
-            variant="outlined"
             autoComplete="off"
+            min={0}
+            max={5}
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
             value={formik.values.rating}
           />
 
