@@ -15,8 +15,11 @@ function Home({ books, user }) {
     <Container>
       <Grid container>
         <Grid item xs={8} md={6}>
-          <h2>Don't Get Lost In Space</h2>
-          {user ? <h2>Welcome {user.username}</h2> : null}
+          <h2>
+            <span>{user ? `Welcome ${user.username}, ` : null}</span>Don't Get
+            Lost In Space
+          </h2>
+
           <p>
             Welcome to our hub for all things science fiction. Get ready to dive
             into mind-bending stories that will take you on thrilling adventures

@@ -53,7 +53,7 @@ function BookDetails({ user }) {
           <img className="bookimg" src={book.cover_image} alt={book.title} />
         </Grid>
       </Grid>
-      <Grid container>
+      <Grid container spacing={2}>
         <Grid item xs={12}>
           <h3>Reviews</h3>
         </Grid>

@@ -11,3 +11,7 @@ body {
 .bookimg {
   width: 15rem;
 }
+
+input {
+  display: block;
+}

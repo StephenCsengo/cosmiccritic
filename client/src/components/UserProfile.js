@@ -4,17 +4,16 @@ import {
   Grid,
   Container,
   Button,
-  TableContainer,
-  TableRow,
-  TableCell,
-  Table,
-  TableHead,
-  TableBody,
+  Rating,
+  Card,
+  CardContent,
 } from "@mui/material";
 
 function UserProfile({ user }) {
   const [userReviews, setUserReviews] = useState([]);
   const [errors, setErrors] = useState([]);
+  const [totalReviews, setTotalReviews] = useState(null);
+  const [avgReviews, setAvgReviews] = useState(null);
 
   useEffect(() => {
     fetch(`/users/${user.id}/reviews`).then((response) => {
@@ -38,36 +37,25 @@ function UserProfile({ user }) {
               <h1>{user.username}'s Profile</h1>
               <h2>Your Reviews</h2>
             </Grid>
-            <Grid item>
-              {userReviews ? (
-                <TableContainer>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Book</TableCell>
-                        <TableCell>Author</TableCell>
-                        <TableCell>Rating</TableCell>
-                        <TableCell>Review</TableCell>
-                        <TableCell></TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {userReviews.map((review) => (
-                        <TableRow key={review.book.title}>
-                          <TableCell>{review.book.title}</TableCell>
-                          <TableCell>{review.book.author.name}</TableCell>
-                          <TableCell>{review.rating}</TableCell>
-                          <TableCell>{review.review}</TableCell>
-                          <TableCell>
-                            <Button>Edit review</Button>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
+            <Grid container spacing={2}>
+              {userReviews.length > 0 ? (
+                userReviews.map((review) => (
+                  <Grid item xs={12} md={4} key={review.book.title}>
+                    <Card>
+                      <CardContent>
+                        <h3>{review.book.title}</h3>
+                        <p>{review.book.author.name}</p>
+                        <Rating value={review.rating} readOnly />
+                        <p>{review.review}</p>
+                        <Button>Edit review</Button>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                ))
               ) : (
-                <p>No reviews to show</p>
+                <Grid item xs={12}>
+                  <p>No reviews to show</p>
+                </Grid>
               )}
             </Grid>
           </Grid>
