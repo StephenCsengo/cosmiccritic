@@ -3,6 +3,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import { AppBar, Container, Grid, Menu, Toolbar, Button } from "@mui/material";
 
 function NavBar({ user, updateUser }) {
+  console.log("From navbar:", user);
   const history = useHistory();
   const handleLogout = () => {
     fetch("/logout", {
@@ -12,6 +13,26 @@ function NavBar({ user, updateUser }) {
     });
     history.push("/loginform");
   };
+
+  const loggedin = (
+    <Grid>
+      <Button color="inherit">My Profile</Button>
+      <Button color="inherit" onClick={handleLogout}>
+        Logout
+      </Button>
+    </Grid>
+  );
+
+  const loggedout = (
+    <Grid>
+      <NavLink to="/signup" exact>
+        <Button color="inherit">Sign Up</Button>
+      </NavLink>
+      <NavLink to="/loginform">
+        <Button color="inherit">Login</Button>
+      </NavLink>
+    </Grid>
+  );
   return (
     <AppBar position="static">
       <Container>
@@ -36,15 +57,7 @@ function NavBar({ user, updateUser }) {
             justifyContent="flex-end"
             alignItems="center"
           >
-            <NavLink to="/signup" exact>
-              <Button color="inherit">Sign Up</Button>
-            </NavLink>
-            <NavLink to="/loginform">
-              <Button color="inherit">Login</Button>
-            </NavLink>
-            <Button color="inherit" onClick={handleLogout}>
-              Logout
-            </Button>
+            {user ? loggedin : loggedout}
           </Grid>
         </Toolbar>
       </Container>

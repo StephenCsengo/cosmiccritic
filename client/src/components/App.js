@@ -10,13 +10,14 @@ import Login from "./Login.js";
 function App() {
   const [user, setUser] = useState(null);
   const [books, setBooks] = useState([]);
+  const [errors, setErrors] = useState([]);
 
   const fetchUser = () => {
     fetch("/checksession").then((response) => {
       if (response.ok) {
         response.json().then((user) => setUser(user));
       } else {
-        console.log("response no good");
+        response.json().then((errors) => setErrors(errors));
       }
     });
   };
