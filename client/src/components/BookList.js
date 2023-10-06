@@ -17,6 +17,8 @@ import Fuse from "fuse.js";
 
 function BookList({ books, onBookClick }) {
   const [query, setQuery] = useState("");
+  const [page, setPage] = useState(0);
+  const [rows, setRows] = useState(10);
   const fuse = new Fuse(books, {
     keys: ["title", "author.name", "publish_year"],
   });
@@ -28,6 +30,14 @@ function BookList({ books, onBookClick }) {
   function handleOnSearch({ currentTarget = {} }) {
     const { value } = currentTarget;
     setQuery(value);
+  }
+
+  function handleChangePage(event, newPage) {
+    setPage(newPage);
+  }
+  function handleChangeRowsPerPage(event) {
+    setRows(parseInt(event.target.value, 10));
+    setPage(0);
   }
   return (
     <Container>
@@ -55,7 +65,7 @@ function BookList({ books, onBookClick }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {bookList.map((book) => (
+            {bookList.slice(page * rows, page * rows + rows).map((book) => (
               <TableRow key={book.title}>
                 <TableCell component="th" scope="row">
                   {book.title}
@@ -78,6 +88,15 @@ function BookList({ books, onBookClick }) {
           </TableBody>
         </Table>
       </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={(5, 10, 20)}
+        component="div"
+        rowsPerPage={rows}
+        count={bookList.length}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
     </Container>
   );
 }
