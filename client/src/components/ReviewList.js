@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Grid, Container, Button } from "@mui/material";
 
-function ReviewList({ setAvgRating }) {
+function ReviewList({ user, setAvgRating }) {
   const { id } = useParams();
   const [reviews, setReviews] = useState([]);
 

@@ -22,11 +22,8 @@ function BookList({ books, onBookClick }) {
   });
 
   const results = fuse.search(query);
-  console.log(results);
 
   const bookList = query ? results.map((book) => book.item) : books;
-
-  console.log(bookList);
 
   function handleOnSearch({ currentTarget = {} }) {
     const { value } = currentTarget;

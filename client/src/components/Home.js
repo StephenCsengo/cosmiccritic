@@ -21,12 +21,20 @@ function Home({ books, user }) {
             Keep track of your thoughts on science fiction novels and discover
             your next great adventure.
           </p>
-          <Link to="/signup">
-            <Button variant="contained">Sign Up</Button>
-          </Link>
-          <p>
-            Already have an account? <a href="/">Login</a>
-          </p>
+          {user ? (
+            <Link to="/booklist">
+              <Button variant="contained">Browse Books</Button>
+            </Link>
+          ) : (
+            <div>
+              <Link to="/signup">
+                <Button variant="contained">Sign Up</Button>
+              </Link>
+              <p>
+                Already have an account? <a href="/">Login</a>
+              </p>
+            </div>
+          )}
         </Grid>
         <Grid item xs={4} md={6}>
           <ImageList sx={{ width: 500, height: 520 }} cols={3} rowHeight={250}>

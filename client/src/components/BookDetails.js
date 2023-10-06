@@ -6,9 +6,11 @@ import RatingForm from "./RatingForm";
 
 function BookDetails({ user }) {
   const { id } = useParams();
+  // console.log(userReviews);
   const [book, setBook] = useState([]);
   const [author, setAuthor] = useState(null);
   const [avgRating, setAvgRating] = useState(null);
+
   useEffect(() => {
     fetch(`/books/${id}`)
       .then((response) => response.json())
@@ -17,6 +19,7 @@ function BookDetails({ user }) {
         setAuthor(data.author.name);
       });
   }, []);
+
   return (
     <Container>
       <Grid container>
@@ -49,7 +52,7 @@ function BookDetails({ user }) {
         <Grid item xs={12}>
           <h3>Reviews</h3>
         </Grid>
-        <ReviewList setAvgRating={setAvgRating} />
+        <ReviewList setAvgRating={setAvgRating} user={user} />
       </Grid>
     </Container>
   );
