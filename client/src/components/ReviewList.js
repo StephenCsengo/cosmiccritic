@@ -13,10 +13,13 @@ function ReviewList({ setAvgRating }) {
         setReviews(data);
       });
   }, []);
-  const ratings = reviews.map((review) => review.rating);
-  const avgRating = ratings.reduce((a, b) => a + b, 0) / ratings.length;
 
-  setAvgRating(avgRating);
+  //Send average rating back to BookDetails
+  useEffect(() => {
+    const ratings = reviews.map((review) => review.rating);
+    const avgRating = ratings.reduce((a, b) => a + b, 0) / ratings.length;
+    setAvgRating(avgRating);
+  }, [reviews, setAvgRating]);
 
   return reviews.map((review) => (
     <Grid item xs={12} md={4} key={review.id}>
