@@ -12,7 +12,19 @@ import {
   TableBody,
 } from "@mui/material";
 
-function UserProfile({ user, userReviews }) {
+function UserProfile({ user }) {
+  const [userReviews, setUserReviews] = useState([]);
+  const [errors, setErrors] = useState([]);
+
+  useEffect(() => {
+    fetch(`/users/${user.id}/reviews`).then((response) => {
+      if (response.ok) {
+        response.json().then((data) => setUserReviews(data));
+      } else {
+        response.json().then((errors) => setErrors(errors));
+      }
+    });
+  }, []);
   console.log("From userprofile: ", user);
 
   console.log("From userprofile: ", userReviews);
