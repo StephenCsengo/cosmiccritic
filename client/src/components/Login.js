@@ -26,9 +26,9 @@ function Login({ updateUser }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
-      }).then((res) => {
-        if (res.status == 200) {
-          res.json().then((result) => {
+      }).then((response) => {
+        if (response.status == 200) {
+          response.json().then((result) => {
             updateUser(result);
             console.log("From login: ", result);
             history.push("/");

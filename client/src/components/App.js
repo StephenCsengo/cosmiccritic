@@ -11,8 +11,19 @@ function App() {
   const [user, setUser] = useState(null);
   const [books, setBooks] = useState([]);
 
+  const fetchUser = () => {
+    fetch("/checksession").then((response) => {
+      if (response.ok) {
+        response.json().then((user) => setUser(user));
+      } else {
+        console.log("response no good");
+      }
+    });
+  };
+
   //Fetch list of books
   useEffect(() => {
+    fetchUser();
     fetch("/books")
       .then((response) => response.json())
       .then((data) => {
