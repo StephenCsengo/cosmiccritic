@@ -154,8 +154,10 @@ class ReviewByID(Resource):
         review = Review.query.filter_by(id=id).first()
 
         if review:
-            for attr in request.form:
-                setattr(dog, attr, request.form[attr])
+            json = request.get_json()
+
+            review.rating = json["rating"]
+            review.review = json["review"]
             db.session.add(review)
             db.session.commit()
 

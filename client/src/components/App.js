@@ -64,8 +64,8 @@ function App() {
         <Route exact path="/userprofile/">
           <UserProfile user={user} />
         </Route>
-        <Route exact path="/editreview">
-          <EditReview />
+        <Route exact path="/editreview/:id">
+          <EditReview user={user} />
         </Route>
       </Switch>
     </div>

@@ -35,7 +35,11 @@ function ReviewList({ user, setAvgRating, setHasReviewed }) {
       </Grid>
     ));
   } else {
-    return <p>No reviews yet!</p>;
+    return (
+      <Grid item xs={12}>
+        <p>No reviews yet!</p>
+      </Grid>
+    );
   }
 }
 

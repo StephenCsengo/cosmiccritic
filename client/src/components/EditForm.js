@@ -5,26 +5,21 @@ import { useFormik, Form, Field } from "formik";
 import * as yup from "yup";
 import { useHistory } from "react-router-dom/";
 
-function RatingForm({
-  user,
-  book,
-  submitLocation = "/reviews",
-  submitMethod = "POST",
-  initialRating = 0,
-  initialReview = "",
-}) {
+function EditForm({ user, review }) {
   const history = useHistory();
+  console.log("From edit form: ", user);
+  console.log("From edit form: ", review);
 
   const formik = useFormik({
     initialValues: {
       user_id: user.id,
-      book_id: book,
-      rating: initialRating,
-      review: initialReview,
+      review_id: review.id,
+      rating: review.rating,
+      review: review.review,
     },
     validationSchema: yup.object({
       user_id: yup.number().required("UserID required.").integer(),
-      book_id: yup.number().required("BookID required.").integer(),
+      review_id: yup.number().required("ReviewID required.").integer(),
       rating: yup
         .number()
         .min(0)
@@ -34,8 +29,8 @@ function RatingForm({
       review: yup.string().nullable(),
     }),
     onSubmit: (values) => {
-      fetch(submitLocation, {
-        method: submitMethod,
+      fetch(`/reviews/${review.id}`, {
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
@@ -51,7 +46,7 @@ function RatingForm({
   return (
     <Grid container>
       <Grid item>
-        <h3>Add Your Review</h3>
+        <h3>Edit Your Review</h3>
         <form onSubmit={formik.handleSubmit}>
           <label htmlFor="rating">Rating</label>
           <input
@@ -82,4 +77,4 @@ function RatingForm({
     </Grid>
   );
 }
-export default RatingForm;
+export default EditForm;
