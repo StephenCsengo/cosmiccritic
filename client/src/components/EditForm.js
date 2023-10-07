@@ -37,7 +37,7 @@ function EditForm({ user, review }) {
         body: JSON.stringify(values),
       }).then((response) => {
         response.json().then((result) => {
-          useHistory.push(`/bookdetails/${review.book.id}`);
+          history.push(`/bookdetails/${review.book.id}`);
         });
       });
     },
