@@ -45,7 +45,7 @@ function BookList({ books, onBookClick }) {
         <Grid item>
           <TextField
             id="search"
-            label="search"
+            label="Book Search"
             variant="outlined"
             autoComplete="off"
             value={query}
