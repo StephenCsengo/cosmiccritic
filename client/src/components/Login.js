@@ -3,10 +3,13 @@ import { Button, Container, Grid, TextField } from "@mui/material";
 
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { ImageList, ImageListItem } from "@mui/material";
 import { useHistory } from "react-router-dom/";
 
-function Login({ updateUser }) {
+function Login({ updateUser, books }) {
+  const [error, setError] = useState(null);
   const history = useHistory();
+  let imageList = books.slice(0, 6);
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -33,6 +36,8 @@ function Login({ updateUser }) {
             console.log("From login: ", result);
             history.push("/");
           });
+        } else if (response.status == 401) {
+          setError("Unauthorized, check your username and password");
         }
       });
     },
@@ -40,40 +45,52 @@ function Login({ updateUser }) {
   return (
     <Container>
       <Grid container>
-        <Grid item xs={12}>
+        <Grid item xs={12} md={6}>
           <h2>Login</h2>
+          <form onSubmit={formik.handleSubmit}>
+            <TextField
+              required
+              id="username"
+              label="Username"
+              variant="outlined"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.username}
+            />
+            {formik.touched.username && formik.errors.username ? (
+              <p>{formik.errors.username}</p>
+            ) : null}
+            <TextField
+              required
+              id="password"
+              label="Password"
+              type="password"
+              variant="outlined"
+              error={error ? true : false}
+              helperText={error}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
+            />
+            {formik.touched.password && formik.errors.password ? (
+              <p>{formik.errors.password}</p>
+            ) : null}
+            <input type="submit" />
+          </form>
         </Grid>
-        <Grid>
-          <Grid item xs={12} md={6}>
-            <form onSubmit={formik.handleSubmit}>
-              <TextField
-                required
-                id="username"
-                label="Username"
-                variant="outlined"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.username}
-              />
-              {formik.touched.username && formik.errors.username ? (
-                <p>{formik.errors.username}</p>
-              ) : null}
-              <TextField
-                required
-                id="password"
-                label="Password"
-                type="password"
-                variant="outlined"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.password}
-              />
-              {formik.touched.password && formik.errors.password ? (
-                <p>{formik.errors.password}</p>
-              ) : null}
-              <input type="submit" />
-            </form>
-          </Grid>
+        <Grid item xs={12} md={6}>
+          <ImageList sx={{ width: 500, height: 520 }} cols={3} rowHeight={250}>
+            {imageList.map((item) => (
+              <ImageListItem key={item.cover_image}>
+                <img
+                  srcSet={`${item.cover_image}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                  src={`${item.cover_image}?w=164&h=164&fit=crop&auto=format`}
+                  alt={item.title}
+                  loading="lazy"
+                />
+              </ImageListItem>
+            ))}
+          </ImageList>
         </Grid>
       </Grid>
     </Container>

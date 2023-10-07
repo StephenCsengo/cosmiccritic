@@ -56,10 +56,10 @@ function App() {
           <BookDetails user={user} />
         </Route>
         <Route exact path="/signup">
-          <SignUp updateUser={handleUpdateUser} />
+          <SignUp books={books} updateUser={handleUpdateUser} />
         </Route>
         <Route exact path="/loginform">
-          <Login updateUser={handleUpdateUser} />
+          <Login books={books} updateUser={handleUpdateUser} />
         </Route>
         <Route exact path="/userprofile/">
           <UserProfile user={user} />
