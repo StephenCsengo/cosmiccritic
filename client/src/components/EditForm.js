@@ -37,7 +37,7 @@ function EditForm({ user, review }) {
         body: JSON.stringify(values),
       }).then((response) => {
         response.json().then((result) => {
-          console.log(result);
+          useHistory.push(`/bookdetails/${review.book.id}`);
         });
       });
     },
@@ -46,7 +46,7 @@ function EditForm({ user, review }) {
   return (
     <Grid container>
       <Grid item>
-        <h3>Edit Your Review</h3>
+        <h3>Update Your Review For {review.book.title}</h3>
         <form onSubmit={formik.handleSubmit}>
           <label htmlFor="rating">Rating</label>
           <input

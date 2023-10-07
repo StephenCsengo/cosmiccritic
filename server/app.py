@@ -165,6 +165,14 @@ class ReviewByID(Resource):
         else:
             return {"message": "Review not found"}, 404
 
+    def delete(self, id):
+        review = Review.query.filter_by(id=id).first()
+
+        db.session.delete(review)
+        db.session.commit()
+
+        return {"message": "Review successfully deleted"}, 200
+
 
 class Users(Resource):
     def get(self):

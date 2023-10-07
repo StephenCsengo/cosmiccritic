@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Grid,
   Container,
@@ -12,8 +12,6 @@ import {
 function UserProfile({ user }) {
   const [userReviews, setUserReviews] = useState([]);
   const [errors, setErrors] = useState([]);
-  const [totalReviews, setTotalReviews] = useState(null);
-  const [avgReviews, setAvgReviews] = useState(null);
 
   useEffect(() => {
     fetch(`/users/${user.id}/reviews`).then((response) => {
@@ -24,9 +22,13 @@ function UserProfile({ user }) {
       }
     });
   }, []);
-  console.log("From userprofile: ", user);
+  console.log("From userprofile user: ", user);
 
   console.log("From userprofile: ", userReviews);
+  let ratingTotal = userReviews.reduce((acc, obj) => {
+    return acc + obj.rating;
+  }, 0);
+  let avgre = ratingTotal / userReviews.length;
 
   return (
     <>
@@ -35,6 +37,21 @@ function UserProfile({ user }) {
           <Grid container>
             <Grid item xs={12}>
               <h1>{user.username}'s Profile</h1>
+              <Grid container>
+                <Grid item xs={12} md={6}>
+                  <Grid container>
+                    <Grid item xs={6}>
+                      <p>Average rating:</p>
+                      <Rating value={avgre} precision={0.5} readOnly />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <p>Number of reviews</p>
+                      <p>{userReviews.length}</p>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+
               <h2>Your Reviews</h2>
             </Grid>
             <Grid container spacing={2}>
@@ -47,7 +64,9 @@ function UserProfile({ user }) {
                         <p>{review.book.author.name}</p>
                         <Rating value={review.rating} readOnly />
                         <p>{review.review}</p>
-                        <Button>Edit review</Button>
+                        <Link to={`/editreview/${review.id}`}>
+                          <Button>Edit review</Button>
+                        </Link>
                       </CardContent>
                     </Card>
                   </Grid>

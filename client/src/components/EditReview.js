@@ -9,19 +9,40 @@ function EditReview({ user }) {
   const { id } = useParams();
   const history = useHistory();
   const [review, setReview] = useState([]);
-
+  const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     fetch(`/reviews/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setReview(data);
+        setLoaded(true);
       });
   }, []);
   return (
     <Container>
       <Grid container>
-        <h2>Edit Review</h2>
-        {user ? <EditForm user={user} review={review} /> : null}
+        <Grid xs={12}>
+          <h2>Edit Review</h2>
+        </Grid>
+        {user ? (
+          <Grid item xs={12}>
+            {loaded ? (
+              <Grid container>
+                <Grid xs={12} md={6}>
+                  <EditForm user={user} review={review} />
+                </Grid>
+                <Grid xs={12} md={6}>
+                  <h3>Previous Review</h3>
+                  <Rating name="rating" value={review.rating} readOnly />
+                  <p>{review.review}</p>
+                  <img className="bookimgedit" src={review.book.cover_image} />
+                </Grid>
+              </Grid>
+            ) : (
+              <p>Loading...</p>
+            )}
+          </Grid>
+        ) : null}
       </Grid>
     </Container>
   );

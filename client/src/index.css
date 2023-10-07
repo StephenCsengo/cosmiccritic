@@ -11,7 +11,9 @@ body {
 .bookimg {
   width: 15rem;
 }
-
+.bookimgedit {
+  width: 7rem;
+}
 input {
   display: block;
 }

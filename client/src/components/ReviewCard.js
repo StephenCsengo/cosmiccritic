@@ -1,11 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Button, Rating, Card, CardContent, Modal } from "@mui/material";
+import { Grid, Button, Rating, Card, CardContent } from "@mui/material";
 import RatingForm from "./RatingForm";
 import { Link } from "react-router-dom";
-import EditButton from "./EditButton";
 
 function ReviewCard({ review, user, setHasReviewed }) {
+  let userId = null;
   const reviewUserId = review.user.id;
+
+  function EditButton() {
+    if (user) {
+      userId = user.id;
+      if (userId === reviewUserId) {
+        setHasReviewed(true);
+        return (
+          <Link to={`/editreview/${review.id}`}>
+            <Button variant="outlined" size="small">
+              Edit Review
+            </Button>
+          </Link>
+        );
+      }
+    }
+  }
 
   return (
     <Card>
@@ -17,16 +33,7 @@ function ReviewCard({ review, user, setHasReviewed }) {
         <p>{review.review}</p>
         {user ? (
           <>
-            <div>
-              <RatingForm
-                user={user}
-                book={review.book}
-                submitLocation={`/reviews/${review.id}`}
-                submitMethod="PATCH"
-                initialRating={review.rating}
-                initialReview={review.review}
-              />
-            </div>
+            <p>{EditButton()}</p>
           </>
         ) : null}
       </CardContent>
