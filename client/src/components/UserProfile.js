@@ -8,6 +8,7 @@ import {
   Rating,
   Card,
   CardContent,
+  Box,
 } from "@mui/material";
 
 function UserProfile({ user }) {
@@ -74,7 +75,9 @@ function UserProfile({ user }) {
                             </Link>
                           </Grid>
                           <Grid item xs={6}>
-                            <DeleteButton reviewId={review.id} />
+                            <Box display="flex" justifyContent="flex-end">
+                              <DeleteButton reviewId={review.id} />
+                            </Box>
                           </Grid>
                         </Grid>
                       </CardContent>

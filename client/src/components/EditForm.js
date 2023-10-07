@@ -61,7 +61,7 @@ function EditForm({ user, review }) {
           />
 
           {formik.touched.rating && formik.errors.rating ? (
-            <p>{formik.errors.rating}</p>
+            <p className="error">{formik.errors.rating}</p>
           ) : null}
           <label htmlFor="review">Review</label>
           <textarea

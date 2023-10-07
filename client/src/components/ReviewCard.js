@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Button, Rating, Card, CardContent } from "@mui/material";
+import { Grid, Button, Rating, Card, CardContent, Box } from "@mui/material";
 import RatingForm from "./RatingForm";
 import DeleteButton from "./DeleteButton";
 import { Link } from "react-router-dom";
@@ -22,8 +22,10 @@ function ReviewCard({ review, user, setHasReviewed, hasReviewed }) {
                 </Button>
               </Link>
             </Grid>
-            <Grid item xs={6} justifyContent="flex-end">
-              <DeleteButton reviewId={review.id} />
+            <Grid item xs={6} justify="flex-end">
+              <Box display="flex" justifyContent="flex-end">
+                <DeleteButton reviewId={review.id} />
+              </Box>
             </Grid>
           </Grid>
         );
