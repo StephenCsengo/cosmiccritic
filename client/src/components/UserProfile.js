@@ -15,14 +15,16 @@ function UserProfile({ user }) {
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
-    fetch(`/users/${user.id}/reviews`).then((response) => {
-      if (response.ok) {
-        response.json().then((data) => setUserReviews(data));
-      } else {
-        response.json().then((errors) => setErrors(errors));
-      }
-    });
-  }, []);
+    if (user) {
+      fetch(`/users/${user.id}/reviews`).then((response) => {
+        if (response.ok) {
+          response.json().then((data) => setUserReviews(data));
+        } else {
+          response.json().then((errors) => setErrors(errors));
+        }
+      });
+    }
+  }, [user]);
   console.log("From userprofile user: ", user);
 
   console.log("From userprofile: ", userReviews);
