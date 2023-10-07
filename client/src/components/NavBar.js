@@ -12,7 +12,7 @@ function NavBar({ user, updateUser }) {
     }).then((response) => {
       updateUser(null);
     });
-    history.push("/loginform");
+    history.push("/");
   };
 
   let userLinks = null;

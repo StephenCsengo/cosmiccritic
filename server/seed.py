@@ -178,7 +178,7 @@ if __name__ == "__main__":
             Book(
                 title="Brave New World",
                 desc="In a highly controlled and pleasure-driven society, citizens grapple with the consequences of their engineered existence.",
-                cover_image="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1498631519i/95558.jpg",
+                cover_image="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1575509280i/5129.jpg",
                 page_count=288,
                 publish_year=1932,
                 author_id=14,
