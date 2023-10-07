@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Grid, Button, Rating, Card, CardContent } from "@mui/material";
 import RatingForm from "./RatingForm";
+import DeleteButton from "./DeleteButton";
 import { Link } from "react-router-dom";
 
-function ReviewCard({ review, user, setHasReviewed }) {
+function ReviewCard({ review, user, setHasReviewed, hasReviewed }) {
   let userId = null;
   const reviewUserId = review.user.id;
 
@@ -13,11 +14,18 @@ function ReviewCard({ review, user, setHasReviewed }) {
       if (userId === reviewUserId) {
         setHasReviewed(true);
         return (
-          <Link to={`/editreview/${review.id}`}>
-            <Button variant="outlined" size="small">
-              Edit Review
-            </Button>
-          </Link>
+          <Grid container>
+            <Grid item xs={6}>
+              <Link to={`/editreview/${review.id}`}>
+                <Button variant="outlined" size="small">
+                  Edit Review
+                </Button>
+              </Link>
+            </Grid>
+            <Grid item xs={6} justifyContent="flex-end">
+              <DeleteButton reviewId={review.id} />
+            </Grid>
+          </Grid>
         );
       }
     }
@@ -31,11 +39,7 @@ function ReviewCard({ review, user, setHasReviewed }) {
         </p>
         <p>By {review.user.username}</p>
         <p>{review.review}</p>
-        {user ? (
-          <>
-            <p>{EditButton()}</p>
-          </>
-        ) : null}
+        {user && !hasReviewed ? <p>{EditButton()}</p> : null}
       </CardContent>
     </Card>
   );

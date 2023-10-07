@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import DeleteButton from "./DeleteButton";
 import { Link } from "react-router-dom";
 import {
   Grid,
@@ -64,9 +65,16 @@ function UserProfile({ user }) {
                         <p>{review.book.author.name}</p>
                         <Rating value={review.rating} readOnly />
                         <p>{review.review}</p>
-                        <Link to={`/editreview/${review.id}`}>
-                          <Button>Edit review</Button>
-                        </Link>
+                        <Grid container>
+                          <Grid item xs={6}>
+                            <Link to={`/editreview/${review.id}`}>
+                              <Button>Edit review</Button>
+                            </Link>
+                          </Grid>
+                          <Grid item xs={6}>
+                            <DeleteButton reviewId={review.id} />
+                          </Grid>
+                        </Grid>
                       </CardContent>
                     </Card>
                   </Grid>
