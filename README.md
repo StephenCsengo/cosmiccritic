@@ -4,8 +4,22 @@ CosmicCritic is a React Flask web application utilizing Material UI for rating a
 
 ## Installation
 
+## Roadmap
+
+- [] Implement likes and comments on reviews.
+
 ## Contributions
+
+Contributions are welcome! Please fork the repository and create a new branch for your features or bug fixes. Submit a pull request describing your changes.
 
 ## License
 
+This project is licensed under the [MIT License](https://choosealicense.com/licenses/mit/).
+
 ## Acknowledgments
+
+Book cover images sourced for demonstration purposes from [GoodReads](https://www.goodreads.com/)
+
+UI implemented with [Material UI](https://mui.com/)
+
+Fuzzy search implemented with [Fuse.js](https://www.fusejs.io/)
