@@ -34,20 +34,17 @@ function App() {
       });
   }, []);
 
-  function handleBookClick(book) {
-    console.log(`${book.id} was clicked`);
-  }
   const handleUpdateUser = (user) => {
     setUser(user);
   };
-  console.log("From app: ", user);
+
   return (
     <div className="app">
       <NavBar user={user} updateUser={handleUpdateUser} />
 
       <Switch>
         <Route path="/booklist">
-          <BookList books={books} onBookClick={handleBookClick} />
+          <BookList books={books} />
         </Route>
         <Route exact path="/">
           <Home books={books} user={user} />

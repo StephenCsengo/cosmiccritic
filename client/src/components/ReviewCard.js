@@ -35,7 +35,7 @@ function ReviewCard({ review, user, setHasReviewed, hasReviewed }) {
 
   return (
     <Card>
-      <CardContent>
+      <CardContent className="card">
         <p>
           <Rating value={review.rating} readOnly />
         </p>

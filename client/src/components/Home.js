@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import {
   Grid,
@@ -10,7 +10,6 @@ import {
 
 function Home({ books, user }) {
   let imageList = books.slice(4, 10);
-  console.log("From home:", user);
   return (
     <Container>
       <Grid container>

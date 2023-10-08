@@ -35,18 +35,18 @@ function SignUp({ books, updateUser }) {
         },
         body: JSON.stringify(values),
       }).then((response) => {
-        if (response.status == 201) {
+        if (response.status === 201) {
           response.json().then((userData) => {
             updateUser(userData);
             history.push("/");
           });
-        } else if (response.status == 401) {
+        } else if (response.status === 401) {
           setError("Username taken.");
         }
       });
     },
   });
-  console.log(error);
+
   return (
     <Container>
       <Grid container>

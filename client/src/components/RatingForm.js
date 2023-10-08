@@ -42,7 +42,6 @@ function RatingForm({
         body: JSON.stringify(values),
       }).then((response) => {
         response.json().then((result) => {
-          console.log(result);
           history.go(0);
         });
       });

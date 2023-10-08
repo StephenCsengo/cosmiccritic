@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Grid, Container, Button, Rating } from "@mui/material";
+import { Grid, Container, Rating } from "@mui/material";
 import ReviewList from "./ReviewList";
 import RatingForm from "./RatingForm";
 
@@ -18,7 +18,7 @@ function BookDetails({ user }) {
         setBook(data);
         setAuthor(data.author.name);
       });
-  }, []);
+  }, [id]);
 
   return (
     <Container>

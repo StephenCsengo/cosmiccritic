@@ -16,7 +16,6 @@ header {
 a {
   color: white;
 }
-
 .bookimg {
   width: 15rem;
 }
@@ -30,8 +29,10 @@ input {
 .hidden {
   display: none;
 }
-
 .error {
   font-size: 0.75rem;
   color: red;
+}
+.card {
+  background-color: #f1f1f1;
 }

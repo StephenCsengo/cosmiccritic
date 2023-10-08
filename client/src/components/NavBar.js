@@ -1,10 +1,8 @@
 import React from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import { AppBar, Container, Grid, Menu, Toolbar, Button } from "@mui/material";
+import { AppBar, Container, Grid, Toolbar, Button } from "@mui/material";
 
 function NavBar({ user, updateUser }) {
-  console.log("From navbar: ", user);
-
   const history = useHistory();
   const handleLogout = () => {
     fetch("/logout", {
@@ -17,7 +15,6 @@ function NavBar({ user, updateUser }) {
 
   let userLinks = null;
   if (user !== null) {
-    const user_id = user.id;
     userLinks = (
       <Grid>
         <NavLink to={"/userprofile/"}>

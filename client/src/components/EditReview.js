@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Container, Grid, Rating, TextField } from "@mui/material";
+import { Container, Grid, Rating } from "@mui/material";
 import EditForm from "./EditForm";
-import { useHistory, useParams } from "react-router-dom/";
+import { useParams } from "react-router-dom/";
 
 function EditReview({ user }) {
   const { id } = useParams();
-  const history = useHistory();
   const [review, setReview] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [userMatch, setUserMatch] = useState(false);
@@ -21,13 +20,12 @@ function EditReview({ user }) {
           }
         }
       });
-  }, [id, user]);
+  }, [id, user, review]);
 
-  console.log(userMatch);
   return (
     <Container>
       <Grid container>
-        <Grid xs={12}>
+        <Grid item xs={12}>
           <h2>Edit Review</h2>
         </Grid>
         {user ? (
@@ -54,6 +52,7 @@ function EditReview({ user }) {
                           <img
                             className="bookimgedit"
                             src={review.book.cover_image}
+                            alt={review.book.title}
                           />
                         </Grid>
                       </Grid>

@@ -30,13 +30,13 @@ function Login({ updateUser, books }) {
         },
         body: JSON.stringify(values),
       }).then((response) => {
-        if (response.status == 200) {
+        if (response.status === 200) {
           response.json().then((result) => {
             updateUser(result);
-            console.log("From login: ", result);
+
             history.push("/");
           });
-        } else if (response.status == 401) {
+        } else if (response.status === 401) {
           setError("Unauthorized, check your username and password");
         }
       });

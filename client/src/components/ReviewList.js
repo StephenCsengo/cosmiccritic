@@ -13,7 +13,7 @@ function ReviewList({ user, setAvgRating, setHasReviewed }) {
       .then((data) => {
         setReviews(data);
       });
-  }, []);
+  }, [id]);
 
   //Send average rating back to BookDetails
   useEffect(() => {

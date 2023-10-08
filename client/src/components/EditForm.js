@@ -7,8 +7,6 @@ import { useHistory } from "react-router-dom/";
 
 function EditForm({ user, review }) {
   const history = useHistory();
-  console.log("From edit form: ", user);
-  console.log("From edit form: ", review);
 
   const formik = useFormik({
     initialValues: {

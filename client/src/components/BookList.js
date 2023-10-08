@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import Fuse from "fuse.js";
 
-function BookList({ books, onBookClick }) {
+function BookList({ books }) {
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(0);
   const [rows, setRows] = useState(10);
@@ -75,12 +75,7 @@ function BookList({ books, onBookClick }) {
                 <TableCell align="center">{book.publish_year}</TableCell>
                 <TableCell align="center">
                   <Link to={`/bookdetails/${book.id}`}>
-                    <Button
-                      variant="contained"
-                      onClick={() => onBookClick(book)}
-                    >
-                      View Details
-                    </Button>
+                    <Button variant="contained">View Details</Button>
                   </Link>
                 </TableCell>
               </TableRow>

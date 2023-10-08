@@ -26,9 +26,7 @@ function UserProfile({ user }) {
       });
     }
   }, [user]);
-  console.log("From userprofile user: ", user);
 
-  console.log("From userprofile: ", userReviews);
   let ratingTotal = userReviews.reduce((acc, obj) => {
     return acc + obj.rating;
   }, 0);
@@ -49,7 +47,7 @@ function UserProfile({ user }) {
                       <Rating value={avgre} precision={0.5} readOnly />
                     </Grid>
                     <Grid item xs={6}>
-                      <p>Number of reviews</p>
+                      <p>Number of reviews:</p>
                       <p>{userReviews.length}</p>
                     </Grid>
                   </Grid>
