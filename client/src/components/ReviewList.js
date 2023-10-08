@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Grid, Container, Button, Rating } from "@mui/material";
+import { Grid } from "@mui/material";
 import ReviewCard from "./ReviewCard.js";
 
 function ReviewList({ user, setAvgRating, setHasReviewed }) {
