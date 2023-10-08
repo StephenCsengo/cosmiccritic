@@ -17,13 +17,13 @@ function EditReview({ user }) {
       .then((data) => {
         setReview(data);
         setLoaded(true);
+        if (user && review) {
+          if (user.id === data.user.id) {
+            setUserMatch(true);
+          }
+        }
       });
-  }, []);
-  // if (user && review) {
-  //   if (user.id === review.user.id) {
-  //     setUserMatch(true);
-  //   }
-  // }
+  }, [id, user]);
 
   console.log(userMatch);
   return (
@@ -34,29 +34,41 @@ function EditReview({ user }) {
         </Grid>
         {user ? (
           <Grid item xs={12}>
-            {loaded ? (
+            {userMatch ? (
               <Grid container>
-                <Grid item xs={12} md={6}>
-                  <EditForm user={user} review={review} />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <h3>Previous Review</h3>
+                {loaded ? (
                   <Grid container>
-                    <Grid item xs={8}>
-                      <Rating name="rating" value={review.rating} readOnly />
-                      <p>{review.review}</p>
+                    <Grid item xs={12} md={6}>
+                      <EditForm user={user} review={review} />
                     </Grid>
-                    <Grid item xs={4}>
-                      <img
-                        className="bookimgedit"
-                        src={review.book.cover_image}
-                      />
+                    <Grid item xs={12} md={6}>
+                      <h3>Previous Review</h3>
+                      <Grid container>
+                        <Grid item xs={8}>
+                          <Rating
+                            name="rating"
+                            value={review.rating}
+                            readOnly
+                          />
+                          <p>{review.review}</p>
+                        </Grid>
+                        <Grid item xs={4}>
+                          <img
+                            className="bookimgedit"
+                            src={review.book.cover_image}
+                          />
+                        </Grid>
+                      </Grid>
                     </Grid>
                   </Grid>
-                </Grid>
+                ) : (
+                  <p>Loading...</p>
+                )}
               </Grid>
             ) : (
-              <p>Loading...</p>
+              <h3 style={{ color: "FireBrick" }}>
+                Cannot edit another user's review
+              </h3>
             )}
           </Grid>
         ) : null}
