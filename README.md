@@ -26,7 +26,9 @@ CosmicCritic is a React Flask web application utilizing Material UI for rating a
 
 5. Seed the database with test data by running:
 
-   `python seed.py`
+   ```
+   python seed.py
+   ```
 
 6. Start the backend application by running within the server directory:
 
@@ -38,13 +40,13 @@ CosmicCritic is a React Flask web application utilizing Material UI for rating a
 
 7. Navigate back to the root directory, then into the client directory, and install frontend dependencies with:
 
-```
-  cd ..
+   ```
+     cd ..
 
-  cd client
+     cd client
 
-  npm install
-```
+     npm install
+   ```
 
 8. Start the frontend application by running within the client directory:
 
@@ -53,6 +55,10 @@ CosmicCritic is a React Flask web application utilizing Material UI for rating a
    ```
 
    Make sure the application is up and running by navigating to `http://localhost:3000` in your browser.
+
+## Entity Relationships
+
+![Entity Relationship Diagram for CosmicCritic](image.png)
 
 ## Roadmap
 
