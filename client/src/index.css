@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
 :root {
   --bg: #282c34;
   --header: #fff;
@@ -6,7 +7,8 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Lato", sans-serif;
+  line-height: 1.75rem;
 }
 header {
   margin-bottom: 3rem;
@@ -14,6 +16,7 @@ header {
 a {
   color: white;
 }
+
 .bookimg {
   width: 15rem;
 }
