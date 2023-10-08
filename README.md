@@ -17,7 +17,8 @@ CosmicCritic is a React Flask web application utilizing Material UI for rating a
 
 4. Install required libraries and enter the virtual environment for the backend from the Pipfile with:
 
-   ```cd server
+   ```
+   cd server
 
    pipenv install && pipenv shell
 
@@ -29,11 +30,13 @@ CosmicCritic is a React Flask web application utilizing Material UI for rating a
 
 6. Start the backend application by running within the server directory:
 
-   `python app.py`
+   ```
+   python app.py
+   ```
 
    Make sure the server is up and running by navigating to `http://localhost:5555` in your browser.
 
-7. Navigate back to the root directory and then into the client directory to install frontend dependencies with:
+7. Navigate back to the root directory, then into the client directory, and install frontend dependencies with:
 
 ```
   cd ..
@@ -45,7 +48,9 @@ CosmicCritic is a React Flask web application utilizing Material UI for rating a
 
 8. Start the frontend application by running within the client directory:
 
-   `npm start`
+   ```
+   npm start
+   ```
 
    Make sure the application is up and running by navigating to `http://localhost:3000` in your browser.
 
