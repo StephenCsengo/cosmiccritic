@@ -10,6 +10,7 @@ function EditReview({ user }) {
   const history = useHistory();
   const [review, setReview] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const [userMatch, setUserMatch] = useState(false);
   useEffect(() => {
     fetch(`/reviews/${id}`)
       .then((response) => response.json())
@@ -18,6 +19,13 @@ function EditReview({ user }) {
         setLoaded(true);
       });
   }, []);
+  // if (user && review) {
+  //   if (user.id === review.user.id) {
+  //     setUserMatch(true);
+  //   }
+  // }
+
+  console.log(userMatch);
   return (
     <Container>
       <Grid container>
@@ -28,14 +36,23 @@ function EditReview({ user }) {
           <Grid item xs={12}>
             {loaded ? (
               <Grid container>
-                <Grid xs={12} md={6}>
+                <Grid item xs={12} md={6}>
                   <EditForm user={user} review={review} />
                 </Grid>
-                <Grid xs={12} md={6}>
+                <Grid item xs={12} md={6}>
                   <h3>Previous Review</h3>
-                  <Rating name="rating" value={review.rating} readOnly />
-                  <p>{review.review}</p>
-                  <img className="bookimgedit" src={review.book.cover_image} />
+                  <Grid container>
+                    <Grid item xs={8}>
+                      <Rating name="rating" value={review.rating} readOnly />
+                      <p>{review.review}</p>
+                    </Grid>
+                    <Grid item xs={4}>
+                      <img
+                        className="bookimgedit"
+                        src={review.book.cover_image}
+                      />
+                    </Grid>
+                  </Grid>
                 </Grid>
               </Grid>
             ) : (

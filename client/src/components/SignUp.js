@@ -14,7 +14,7 @@ import * as yup from "yup";
 function SignUp({ books, updateUser }) {
   const [error, setError] = useState(null);
   const history = useHistory();
-  let imageList = books.slice(0, 6);
+  let imageList = books.slice(9, 15);
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -34,12 +34,13 @@ function SignUp({ books, updateUser }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
-      }).then((res) => {
-        if (res.status == 201) {
-          const userData = res.json();
-
-          updateUser(userData);
-        } else if (res.status == 401) {
+      }).then((response) => {
+        if (response.status == 201) {
+          response.json().then((userData) => {
+            updateUser(userData);
+            history.push("/");
+          });
+        } else if (response.status == 401) {
           setError("Username taken.");
         }
       });
@@ -50,36 +51,46 @@ function SignUp({ books, updateUser }) {
     <Container>
       <Grid container>
         <Grid item xs={12} md={6}>
-          <h2>Sign up</h2>
+          <h2>Sign Up</h2>
           <form onSubmit={formik.handleSubmit}>
-            <TextField
-              required
-              id="username"
-              label="Username"
-              variant="outlined"
-              error={error ? true : false}
-              helperText={error}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.username}
-            />
-            {formik.errors.username ? (
-              <p className="error">{formik.errors.username}</p>
-            ) : null}
-            <TextField
-              required
-              id="password"
-              label="Password"
-              type="password"
-              variant="outlined"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.password}
-            />
-            {formik.errors.password ? (
-              <p className="error">{formik.errors.password}</p>
-            ) : null}
-            <input type="submit" />
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  id="username"
+                  label="Username"
+                  variant="outlined"
+                  error={error ? true : false}
+                  helperText={error}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.username}
+                />
+                {formik.errors.username ? (
+                  <p className="error">{formik.errors.username}</p>
+                ) : null}
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  id="password"
+                  label="Password"
+                  type="password"
+                  variant="outlined"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.password}
+                />
+                {formik.errors.password ? (
+                  <p className="error">{formik.errors.password}</p>
+                ) : null}
+              </Grid>
+              <Grid item xs={12}>
+                <Button variant="contained" type="submit">
+                  Sign Up
+                </Button>
+              </Grid>
+            </Grid>
           </form>
         </Grid>
         <Grid item xs={12} md={6}>

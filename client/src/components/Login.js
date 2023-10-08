@@ -48,34 +48,44 @@ function Login({ updateUser, books }) {
         <Grid item xs={12} md={6}>
           <h2>Login</h2>
           <form onSubmit={formik.handleSubmit}>
-            <TextField
-              required
-              id="username"
-              label="Username"
-              variant="outlined"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.username}
-            />
-            {formik.touched.username && formik.errors.username ? (
-              <p>{formik.errors.username}</p>
-            ) : null}
-            <TextField
-              required
-              id="password"
-              label="Password"
-              type="password"
-              variant="outlined"
-              error={error ? true : false}
-              helperText={error}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.password}
-            />
-            {formik.touched.password && formik.errors.password ? (
-              <p>{formik.errors.password}</p>
-            ) : null}
-            <input type="submit" />
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  id="username"
+                  label="Username"
+                  variant="outlined"
+                  error={error ? true : false}
+                  helperText={error}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.username}
+                />
+                {formik.errors.username ? (
+                  <p className="error">{formik.errors.username}</p>
+                ) : null}
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  id="password"
+                  label="Password"
+                  type="password"
+                  variant="outlined"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.password}
+                />
+                {formik.errors.password ? (
+                  <p className="error">{formik.errors.password}</p>
+                ) : null}
+              </Grid>
+              <Grid item xs={12}>
+                <Button variant="contained" type="submit">
+                  Login
+                </Button>
+              </Grid>
+            </Grid>
           </form>
         </Grid>
         <Grid item xs={12} md={6}>

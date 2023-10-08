@@ -22,7 +22,7 @@ function BookDetails({ user }) {
 
   return (
     <Container>
-      <Grid container>
+      <Grid container spacing={2}>
         <Grid item xs={8}>
           <h2>{book.title}</h2>
           <p>By {author}</p>

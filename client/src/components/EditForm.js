@@ -44,34 +44,46 @@ function EditForm({ user, review }) {
   });
 
   return (
-    <Grid container>
+    <Grid container spacing={2}>
       <Grid item>
         <h3>Update Your Review For {review.book.title}</h3>
         <form onSubmit={formik.handleSubmit}>
-          <label htmlFor="rating">Rating</label>
-          <input
-            type="number"
-            id="rating"
-            autoComplete="off"
-            min={0}
-            max={5}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.rating}
-          />
+          <Grid container spacing={2}>
+            <Grid item xs={3}>
+              <TextField
+                type="number"
+                id="rating"
+                label="Rating"
+                autoComplete="off"
+                min={0}
+                max={5}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.rating}
+              />
 
-          {formik.touched.rating && formik.errors.rating ? (
-            <p className="error">{formik.errors.rating}</p>
-          ) : null}
-          <label htmlFor="review">Review</label>
-          <textarea
-            id="review"
-            rows={4}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.review}
-          />
-          <Button type="submit">Submit Review</Button>
+              {formik.touched.rating && formik.errors.rating ? (
+                <p className="error">{formik.errors.rating}</p>
+              ) : null}
+            </Grid>
+
+            <Grid item xs={9}>
+              <TextField
+                id="review"
+                label="Review"
+                rows={4}
+                multiline
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.review}
+              />
+            </Grid>
+            <Grid item xs={12} style={{ textAlign: "center" }}>
+              <Button variant="outlined" type="submit">
+                Submit Review
+              </Button>
+            </Grid>
+          </Grid>
         </form>
       </Grid>
     </Grid>

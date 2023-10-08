@@ -11,6 +11,9 @@ body {
 header {
   margin-bottom: 3rem;
 }
+a {
+  color: white;
+}
 .bookimg {
   width: 15rem;
 }
