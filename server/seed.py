@@ -89,7 +89,7 @@ if __name__ == "__main__":
             ),
             Book(
                 title="Do Androids Dream of Electric Sheep?",
-                desc="n a post-apocalyptic world, bounty hunter Rick Deckard is tasked with 'retiring' rogue androids who have developed human-like emotions and identities.",
+                desc="In a post-apocalyptic world, bounty hunter Rick Deckard is tasked with 'retiring' rogue androids who have developed human-like emotions and identities.",
                 cover_image="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1357936711i/6696927.jpg",
                 page_count=210,
                 publish_year=1968,

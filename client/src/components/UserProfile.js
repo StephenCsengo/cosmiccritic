@@ -61,7 +61,7 @@ function UserProfile({ user }) {
                 userReviews.map((review) => (
                   <Grid item xs={12} md={4} key={review.book.title}>
                     <Card>
-                      <CardContent>
+                      <CardContent className="card">
                         <h3>{review.book.title}</h3>
                         <p>{review.book.author.name}</p>
                         <Rating value={review.rating} readOnly />
